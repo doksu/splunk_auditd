@@ -1,0 +1,572 @@
+<form refresh="300">
+  <label>Type Enforcement</label>
+  <description/>
+  <fieldset submitButton="true">
+    <input type="text" token="host">
+      <label>Host</label>
+      <default>*</default>
+    </input>
+    <input type="text" token="s_domain">
+      <label>Subject Domain</label>
+      <default>*</default>
+    </input>
+    <input type="text" token="t_type">
+      <label>Target Type</label>
+      <default>*</default>
+    </input>
+    <input type="multiselect" token="class" searchWhenChanged="false">
+      <label>Object Class</label>
+      <choice value="*">any</choice>
+      <choice value="netlink_audit_socket">netlink_audit_socket</choice>
+      <choice value="tcp_socket">tcp_socket</choice>
+      <choice value="msgq">msgq</choice>
+      <choice value="x_property">x_property</choice>
+      <choice value="db_procedure">db_procedure</choice>
+      <choice value="dir">dir</choice>
+      <choice value="peer">peer</choice>
+      <choice value="blk_file">blk_file</choice>
+      <choice value="chr_file">chr_file</choice>
+      <choice value="db_table">db_table</choice>
+      <choice value="db_tuple">db_tuple</choice>
+      <choice value="dbus">dbus</choice>
+      <choice value="ipc">ipc</choice>
+      <choice value="lnk_file">lnk_file</choice>
+      <choice value="process">process</choice>
+      <choice value="capability2">capability2</choice>
+      <choice value="fd">fd</choice>
+      <choice value="packet">packet</choice>
+      <choice value="socket">socket</choice>
+      <choice value="fifo_file">fifo_file</choice>
+      <choice value="file">file</choice>
+      <choice value="node">node</choice>
+      <choice value="x_cursor">x_cursor</choice>
+      <choice value="x_server">x_server</choice>
+      <choice value="db_view">db_view</choice>
+      <choice value="netlink_nflog_socket">netlink_nflog_socket</choice>
+      <choice value="key">key</choice>
+      <choice value="netlink_tcpdiag_socket">netlink_tcpdiag_socket</choice>
+      <choice value="unix_stream_socket">unix_stream_socket</choice>
+      <choice value="x_synthetic_event">x_synthetic_event</choice>
+      <choice value="db_database">db_database</choice>
+      <choice value="db_language">db_language</choice>
+      <choice value="kernel_service">kernel_service</choice>
+      <choice value="netlink_route_socket">netlink_route_socket</choice>
+      <choice value="x_extension">x_extension</choice>
+      <choice value="db_sequence">db_sequence</choice>
+      <choice value="shm">shm</choice>
+      <choice value="x_resource">x_resource</choice>
+      <choice value="netlink_selinux_socket">netlink_selinux_socket</choice>
+      <choice value="capability">capability</choice>
+      <choice value="netlink_ip6fw_socket">netlink_ip6fw_socket</choice>
+      <choice value="dccp_socket">dccp_socket</choice>
+      <choice value="netlink_firewall_socket">netlink_firewall_socket</choice>
+      <choice value="sock_file">sock_file</choice>
+      <choice value="unix_dgram_socket">unix_dgram_socket</choice>
+      <choice value="netlink_kobject_uevent_socket">netlink_kobject_uevent_socket</choice>
+      <choice value="db_blob">db_blob</choice>
+      <choice value="filesystem">filesystem</choice>
+      <choice value="netlink_xfrm_socket">netlink_xfrm_socket</choice>
+      <choice value="x_device">x_device</choice>
+      <choice value="db_schema">db_schema</choice>
+      <choice value="netlink_dnrt_socket">netlink_dnrt_socket</choice>
+      <choice value="x_client">x_client</choice>
+      <choice value="x_gc">x_gc</choice>
+      <choice value="context">context</choice>
+      <choice value="nscd">nscd</choice>
+      <choice value="passwd">passwd</choice>
+      <choice value="x_event">x_event</choice>
+      <choice value="x_font">x_font</choice>
+      <choice value="service">service</choice>
+      <choice value="key_socket">key_socket</choice>
+      <choice value="netif">netif</choice>
+      <choice value="packet_socket">packet_socket</choice>
+      <choice value="memprotect">memprotect</choice>
+      <choice value="msg">msg</choice>
+      <choice value="tun_socket">tun_socket</choice>
+      <choice value="udp_socket">udp_socket</choice>
+      <choice value="appletalk_socket">appletalk_socket</choice>
+      <choice value="proxy">proxy</choice>
+      <choice value="x_colormap">x_colormap</choice>
+      <choice value="x_screen">x_screen</choice>
+      <choice value="rawip_socket">rawip_socket</choice>
+      <choice value="x_application_data">x_application_data</choice>
+      <choice value="association">association</choice>
+      <choice value="x_selection">x_selection</choice>
+      <choice value="db_column">db_column</choice>
+      <choice value="netlink_socket">netlink_socket</choice>
+      <choice value="x_drawable">x_drawable</choice>
+      <choice value="sem">sem</choice>
+      <choice value="system">system</choice>
+      <choice value="x_keyboard">x_keyboard</choice>
+      <choice value="security">security</choice>
+      <choice value="x_pointer">x_pointer</choice>
+      <default>*</default>
+      <valuePrefix>tclass=</valuePrefix>
+      <delimiter> OR </delimiter>
+    </input>
+    <input type="multiselect" token="permission" searchWhenChanged="false">
+      <label>Permission</label>
+      <choice value="*">any</choice>
+      <choice value="accept">accept</choice>
+      <choice value="acceptfrom">acceptfrom</choice>
+      <choice value="access">access</choice>
+      <choice value="acquire_svc">acquire_svc</choice>
+      <choice value="add">add</choice>
+      <choice value="add_child">add_child</choice>
+      <choice value="add_color">add_color</choice>
+      <choice value="add_glyph">add_glyph</choice>
+      <choice value="add_name">add_name</choice>
+      <choice value="admin">admin</choice>
+      <choice value="append">append</choice>
+      <choice value="associate">associate</choice>
+      <choice value="attach_queue">attach_queue</choice>
+      <choice value="audit_access">audit_access</choice>
+      <choice value="audit_control">audit_control</choice>
+      <choice value="audit_write">audit_write</choice>
+      <choice value="bell">bell</choice>
+      <choice value="bind">bind</choice>
+      <choice value="blend">blend</choice>
+      <choice value="block_suspend">block_suspend</choice>
+      <choice value="check_context">check_context</choice>
+      <choice value="chfn">chfn</choice>
+      <choice value="chown">chown</choice>
+      <choice value="chsh">chsh</choice>
+      <choice value="compromise_kernel">compromise_kernel</choice>
+      <choice value="compute_av">compute_av</choice>
+      <choice value="compute_create">compute_create</choice>
+      <choice value="compute_member">compute_member</choice>
+      <choice value="compute_relabel">compute_relabel</choice>
+      <choice value="compute_user">compute_user</choice>
+      <choice value="connect">connect</choice>
+      <choice value="connectto">connectto</choice>
+      <choice value="contains">contains</choice>
+      <choice value="copy">copy</choice>
+      <choice value="create">create</choice>
+      <choice value="create_files_as">create_files_as</choice>
+      <choice value="crontab">crontab</choice>
+      <choice value="dac_override">dac_override</choice>
+      <choice value="dac_read_search">dac_read_search</choice>
+      <choice value="dccp_recv">dccp_recv</choice>
+      <choice value="dccp_send">dccp_send</choice>
+      <choice value="debug">debug</choice>
+      <choice value="delete">delete</choice>
+      <choice value="destroy">destroy</choice>
+      <choice value="disable">disable</choice>
+      <choice value="drop">drop</choice>
+      <choice value="dyntransition">dyntransition</choice>
+      <choice value="egress">egress</choice>
+      <choice value="enable">enable</choice>
+      <choice value="enforce_dest">enforce_dest</choice>
+      <choice value="enqueue">enqueue</choice>
+      <choice value="entrypoint">entrypoint</choice>
+      <choice value="epolwakeup">epolwakeup</choice>
+      <choice value="execheap">execheap</choice>
+      <choice value="execmem">execmem</choice>
+      <choice value="execmod">execmod</choice>
+      <choice value="execstack">execstack</choice>
+      <choice value="execute">execute</choice>
+      <choice value="execute_no_trans">execute_no_trans</choice>
+      <choice value="expand">expand</choice>
+      <choice value="export">export</choice>
+      <choice value="flow_in">flow_in</choice>
+      <choice value="flow_out">flow_out</choice>
+      <choice value="force_cursor">force_cursor</choice>
+      <choice value="fork">fork</choice>
+      <choice value="forward_in">forward_in</choice>
+      <choice value="forward_out">forward_out</choice>
+      <choice value="fowner">fowner</choice>
+      <choice value="freeze">freeze</choice>
+      <choice value="fsetid">fsetid</choice>
+      <choice value="getattr">getattr</choice>
+      <choice value="getcap">getcap</choice>
+      <choice value="getfocus">getfocus</choice>
+      <choice value="getgrp">getgrp</choice>
+      <choice value="gethost">gethost</choice>
+      <choice value="getnetgrp">getnetgrp</choice>
+      <choice value="getopt">getopt</choice>
+      <choice value="get_param">get_param</choice>
+      <choice value="getpgid">getpgid</choice>
+      <choice value="get_property">get_property</choice>
+      <choice value="getpwd">getpwd</choice>
+      <choice value="getsched">getsched</choice>
+      <choice value="getserv">getserv</choice>
+      <choice value="getsession">getsession</choice>
+      <choice value="getstat">getstat</choice>
+      <choice value="get_value">get_value</choice>
+      <choice value="grab">grab</choice>
+      <choice value="halt">halt</choice>
+      <choice value="hide">hide</choice>
+      <choice value="hide_cursor">hide_cursor</choice>
+      <choice value="implement">implement</choice>
+      <choice value="import">import</choice>
+      <choice value="ingress">ingress</choice>
+      <choice value="insert">insert</choice>
+      <choice value="install">install</choice>
+      <choice value="install_module">install_module</choice>
+      <choice value="ioctl">ioctl</choice>
+      <choice value="ipc_info">ipc_info</choice>
+      <choice value="ipc_lock">ipc_lock</choice>
+      <choice value="ipc_owner">ipc_owner</choice>
+      <choice value="kill">kill</choice>
+      <choice value="lease">lease</choice>
+      <choice value="link">link</choice>
+      <choice value="linux_immutable">linux_immutable</choice>
+      <choice value="list_child">list_child</choice>
+      <choice value="listen">listen</choice>
+      <choice value="list_property">list_property</choice>
+      <choice value="load">load</choice>
+      <choice value="load_module">load_module</choice>
+      <choice value="load_policy">load_policy</choice>
+      <choice value="lock">lock</choice>
+      <choice value="mac_admin">mac_admin</choice>
+      <choice value="mac_override">mac_override</choice>
+      <choice value="manage">manage</choice>
+      <choice value="mknod">mknod</choice>
+      <choice value="mmap_zero">mmap_zero</choice>
+      <choice value="module_request">module_request</choice>
+      <choice value="mount">mount</choice>
+      <choice value="mounton">mounton</choice>
+      <choice value="name_bind">name_bind</choice>
+      <choice value="name_connect">name_connect</choice>
+      <choice value="net_admin">net_admin</choice>
+      <choice value="net_bind_service">net_bind_service</choice>
+      <choice value="net_broadcast">net_broadcast</choice>
+      <choice value="net_raw">net_raw</choice>
+      <choice value="newconn">newconn</choice>
+      <choice value="next_value">next_value</choice>
+      <choice value="nlmsg_read">nlmsg_read</choice>
+      <choice value="nlmsg_readpriv">nlmsg_readpriv</choice>
+      <choice value="nlmsg_relay">nlmsg_relay</choice>
+      <choice value="nlmsg_tty_audit">nlmsg_tty_audit</choice>
+      <choice value="nlmsg_write">nlmsg_write</choice>
+      <choice value="noatsecure">noatsecure</choice>
+      <choice value="node_bind">node_bind</choice>
+      <choice value="open">open</choice>
+      <choice value="override">override</choice>
+      <choice value="passwd">passwd</choice>
+      <choice value="paste">paste</choice>
+      <choice value="paste_after_confirm">paste_after_confirm</choice>
+      <choice value="polmatch">polmatch</choice>
+      <choice value="ptrace">ptrace</choice>
+      <choice value="ptrace_child">ptrace_child</choice>
+      <choice value="query">query</choice>
+      <choice value="quotaget">quotaget</choice>
+      <choice value="quotamod">quotamod</choice>
+      <choice value="quotaon">quotaon</choice>
+      <choice value="rawip_recv">rawip_recv</choice>
+      <choice value="rawip_send">rawip_send</choice>
+      <choice value="read">read</choice>
+      <choice value="read_policy">read_policy</choice>
+      <choice value="reboot">reboot</choice>
+      <choice value="receive">receive</choice>
+      <choice value="record">record</choice>
+      <choice value="recv">recv</choice>
+      <choice value="recvfrom">recvfrom</choice>
+      <choice value="recv_msg">recv_msg</choice>
+      <choice value="relabelfrom">relabelfrom</choice>
+      <choice value="relabelto">relabelto</choice>
+      <choice value="reload">reload</choice>
+      <choice value="remount">remount</choice>
+      <choice value="remove">remove</choice>
+      <choice value="remove_child">remove_child</choice>
+      <choice value="remove_color">remove_color</choice>
+      <choice value="remove_glyph">remove_glyph</choice>
+      <choice value="remove_name">remove_name</choice>
+      <choice value="rename">rename</choice>
+      <choice value="reparent">reparent</choice>
+      <choice value="rlimitinh">rlimitinh</choice>
+      <choice value="rmdir">rmdir</choice>
+      <choice value="rootok">rootok</choice>
+      <choice value="saver_getattr">saver_getattr</choice>
+      <choice value="saver_hide">saver_hide</choice>
+      <choice value="saver_setattr">saver_setattr</choice>
+      <choice value="saver_show">saver_show</choice>
+      <choice value="search">search</choice>
+      <choice value="select">select</choice>
+      <choice value="send">send</choice>
+      <choice value="send_msg">send_msg</choice>
+      <choice value="sendto">sendto</choice>
+      <choice value="setattr">setattr</choice>
+      <choice value="setbool">setbool</choice>
+      <choice value="setcap">setcap</choice>
+      <choice value="setcheckreqprot">setcheckreqprot</choice>
+      <choice value="setcontext">setcontext</choice>
+      <choice value="setcurrent">setcurrent</choice>
+      <choice value="setenforce">setenforce</choice>
+      <choice value="setexec">setexec</choice>
+      <choice value="setfcap">setfcap</choice>
+      <choice value="setfocus">setfocus</choice>
+      <choice value="setfscreate">setfscreate</choice>
+      <choice value="setgid">setgid</choice>
+      <choice value="setkeycreate">setkeycreate</choice>
+      <choice value="setopt">setopt</choice>
+      <choice value="set_param">set_param</choice>
+      <choice value="setpcap">setpcap</choice>
+      <choice value="setpgid">setpgid</choice>
+      <choice value="set_property">set_property</choice>
+      <choice value="setrlimit">setrlimit</choice>
+      <choice value="setsched">setsched</choice>
+      <choice value="setsecparam">setsecparam</choice>
+      <choice value="setsockcreate">setsockcreate</choice>
+      <choice value="setuid">setuid</choice>
+      <choice value="set_value">set_value</choice>
+      <choice value="share">share</choice>
+      <choice value="shmemgrp">shmemgrp</choice>
+      <choice value="shmemhost">shmemhost</choice>
+      <choice value="shmemnetgrp">shmemnetgrp</choice>
+      <choice value="shmempwd">shmempwd</choice>
+      <choice value="shmemserv">shmemserv</choice>
+      <choice value="show">show</choice>
+      <choice value="show_cursor">show_cursor</choice>
+      <choice value="shutdown">shutdown</choice>
+      <choice value="sigchld">sigchld</choice>
+      <choice value="siginh">siginh</choice>
+      <choice value="sigkill">sigkill</choice>
+      <choice value="signal">signal</choice>
+      <choice value="signull">signull</choice>
+      <choice value="sigstop">sigstop</choice>
+      <choice value="start">start</choice>
+      <choice value="status">status</choice>
+      <choice value="stop">stop</choice>
+      <choice value="swapon">swapon</choice>
+      <choice value="sys_admin">sys_admin</choice>
+      <choice value="sys_boot">sys_boot</choice>
+      <choice value="sys_chroot">sys_chroot</choice>
+      <choice value="syslog">syslog</choice>
+      <choice value="syslog_console">syslog_console</choice>
+      <choice value="syslog_mod">syslog_mod</choice>
+      <choice value="syslog_read">syslog_read</choice>
+      <choice value="sys_module">sys_module</choice>
+      <choice value="sys_nice">sys_nice</choice>
+      <choice value="sys_pacct">sys_pacct</choice>
+      <choice value="sys_ptrace">sys_ptrace</choice>
+      <choice value="sys_rawio">sys_rawio</choice>
+      <choice value="sys_resource">sys_resource</choice>
+      <choice value="sys_time">sys_time</choice>
+      <choice value="sys_tty_config">sys_tty_config</choice>
+      <choice value="tcp_recv">tcp_recv</choice>
+      <choice value="tcp_send">tcp_send</choice>
+      <choice value="transition">transition</choice>
+      <choice value="translate">translate</choice>
+      <choice value="udp_recv">udp_recv</choice>
+      <choice value="udp_send">udp_send</choice>
+      <choice value="undefined">undefined</choice>
+      <choice value="uninstall">uninstall</choice>
+      <choice value="unix_read">unix_read</choice>
+      <choice value="unix_write">unix_write</choice>
+      <choice value="unlink">unlink</choice>
+      <choice value="unmount">unmount</choice>
+      <choice value="update">update</choice>
+      <choice value="use">use</choice>
+      <choice value="use_as_override">use_as_override</choice>
+      <choice value="view">view</choice>
+      <choice value="wake_alarm">wake_alarm</choice>
+      <choice value="write">write</choice>
+      <default>*</default>
+      <valuePrefix>perm=</valuePrefix>
+      <delimiter> OR </delimiter>
+    </input>
+    <input type="text" token="other">
+      <label>Other Search Terms</label>
+      <default>*</default>
+    </input>
+    <input type="radio" token="action">
+      <label>Result</label>
+      <choice value="denied">Denied</choice>
+      <choice value="auditallow">Audit Allow</choice>
+      <default>denied</default>
+    </input>
+    <input type="time" token="time_selector">
+      <label/>
+      <default>
+        <earliestTime>-24h@h</earliestTime>
+        <latestTime>now</latestTime>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>Event Count by Host</title>
+        <searchString>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | top host</searchString>
+        <earliestTime>$time_selector.earliest$</earliestTime>
+        <latestTime>$time_selector.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <table>
+        <title>Rare Vectors</title>
+        <searchString>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | eventstats dc(host) as host_count by scontext_domain tcontext_type tclass perm | eventstats count as perm_count by scontext_domain tcontext_type tclass perm | table scontext_domain tcontext_type tclass perm perm_count host_count | sort +perm_count +host_count | head 10</searchString>
+        <earliestTime>$time_selector.earliest$</earliestTime>
+        <latestTime>$time_selector.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Top 5 Most Common Vectors by Hosts</title>
+        <searchString>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | eventstats dc(host) as host_count by scontext_domain tcontext_type tclass perm | dedup host_count | sort -host_count | table host_count scontext_domain tcontext_type tclass perm | head 5</searchString>
+        <earliestTime>$time_selector.earliest$</earliestTime>
+        <latestTime>$time_selector.latest$</latestTime>
+        <option name="list.drilldown">full</option>
+        <option name="list.wrap">1</option>
+        <option name="maxLines">5</option>
+        <option name="raw.drilldown">full</option>
+        <option name="rowNumbers">false</option>
+        <option name="table.drilldown">all</option>
+        <option name="table.wrap">1</option>
+        <option name="type">list</option>
+        <option name="wrap">true</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">row</option>
+        <option name="count">5</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Top 5 Most Common Vectors Overall</title>
+        <searchString>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | top limit=5 scontext_domain tcontext_type tclass perm</searchString>
+        <earliestTime>$time_selector.earliest$</earliestTime>
+        <latestTime>$time_selector.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">5</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="drilldown">row</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Top Domains by AVC Count</title>
+        <searchString>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | top scontext_domain</searchString>
+        <earliestTime>$time_selector.earliest$</earliestTime>
+        <latestTime>$time_selector.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top Domains by Distinct AVC Count</title>
+        <searchString>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | stats dc(tcontext_type) by scontext_domain</searchString>
+        <earliestTime>$time_selector.earliest$</earliestTime>
+        <latestTime>$time_selector.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Event Vector Tuples</title>
+        <searchString>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | table _time host scontext_domain tcontext_type tclass perm action</searchString>
+        <earliestTime>$time_selector.earliest$</earliestTime>
+        <latestTime>$time_selector.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">row</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

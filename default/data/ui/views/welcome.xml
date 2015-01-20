@@ -1,0 +1,97 @@
+<dashboard>
+  <label>Welcome</label>
+  <description/>
+  <row>
+    <panel>
+      <html>
+        <h2>About</h2>
+        <p>Auditd logs are the single richest and most precise source of auditing information available in GNU/Linux, however they are too often underutilised due to their complexity. This app and its TA make that information readily accessible at enterprise-scale in three mobile-friendly dashboards together with various field extractions, lookups and CIM mappings for Enterprise Security. For example, the event below is mostly comprised of easily parsed key-value pairs, however this app uses the "arch" and "syscall" number to resolve the system call made and determine the posix user from the auid ("actual uid" of the user who executed the process) for searching and correlation in Enterprise Security.</p>
+
+        <p>
+          <center>type=SYSCALL msg=audit(1321390138.034:228150): arch=c000003e syscall=62 success=yes exit=0 a0=14a3 a1=0 a2=7fcfa39 a3=12a0 items=0 ppid=19051 pid=19128 auid=3045 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=7643 comm="splunkd" exe="/opt/splunk/bin/splunkd" subj=system_u:system_r:splunk_t:s0 key=(null)</center>
+        </p>
+        <p/>
+        <h2>Installation</h2>
+        <p>Auditd events (sourcetype=linux:audit OR sourcetype=linux_audit) are collected using the Splunk App for Unix and Linux's "Splunk_TA_nix" app deployed to forwarders. This linux-auditd app and its TA_linux-auditd app need only be installed on search heads; if desired, the TA can be installed without this linux-auditd app on Enterprise Security search heads. To install the TA_linux-auditd app, simply copy it from linux-auditd/appserver/addons/ to $SPLUNK_HOME/etc/apps/; restart Splunk; and the "TA Status" window below should change from "N/A" to "Working". N.B. Neither this app nor the TA have any mandatory collection, cook, or index-time configurations (ie. it is not necessary to deploy them to forwarders or indexers), however for your convenience, should it be necessary (ie. for collecting auditd events via syslog), we have included a syslog transform; in that case, uncomment the provided prop in TA_linux-auditd and deploy to your syslog collection heavyforwarder/indexer servers.</p>
+
+        <p>As noted above, the TA will resolve uid values to posix usernames. For this to occur, two lookups require populating. The first contains local users (typically created by package management) and can be extracted from /etc/passwd using the following command: awk -F ':' 'BEGIN {print "uid,user"} {print $3","$1}' /etc/passwd &gt; /opt/splunk/etc/apps/TA_linux-audit/lookups/local_posix_identities.csv</p>
+
+        <p>For improved dashboard performance in large environments, it's recommended to create a local eventtypes.conf in the TA_linux-auditd app to override the default "index=*", explicitly specifying the indices where auditd events are stored in your environment.</p>
+        
+        <p>The second lookup contains directory users and can be populated by scheduling the following search to run periodically with the SA-ldapsearch app: |ldapsearch search="(&amp;(objectclass=user)(uidNumber=*))" attrs="sAMAccountName,uidNumber" | rename sAMAccountName as user, uidNumber as uid | table uid user | outputlookup directory_posix_identities</p>
+        <p/>
+        <h2>Kernel Dashboard</h2>
+        <p>The kernel dashboard provides the means to interrogate different high-level aspects of auditd events. For simplified searching, we have categoried the various types of audit events into four categories: system, mac (Mandatory Access Control), network and user. As part of the CIM mapping, each audit event type has also been assigned a severity. Be sure to look at the description provided with the raw events in the bottom pane.</p>
+        <p/>
+        <h2>System Call Dashboard</h2>
+        <p>The auditd daemon can be configured to log any system call to any resource. For example, if a rule was put in place to audit all writes to /etc/sysconfig/iptables, with this dashboard's auid field resolution it would tell you the user that made the change.</p>
+        <p/>
+        <h2>Type Enforcement Dashboard</h2>
+        <p>SELinux is a Mandatory Access Control that provides [Domain] Type Enforcement (TE), Information Flow (MCS/MLS) and Role-Based Access Controls (RBACs). By default, Enterprise Linux uses Type Enforcement and this dashboard provides the means for administrators to interrogate those Access Vector Control (AVC) events across their fleet. It should be noted that the vectors shown in the "rare" pane ought to be investigated, as depending on your environment, they may indicate compromise.</p>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <single>
+        <title>Number of Auditd Hosts</title>
+        <searchString>index=* sourcetype=linux:audit OR sourcetype=linux_audit | stats dc(host)</searchString>
+        <earliestTime>-60m@m</earliestTime>
+        <latestTime>now</latestTime>
+        <option name="drilldown">none</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>TA Status</title>
+        <searchString>eventtype=auditd_events | head 1 | eval status=if(isnotnull(severity),"Working","Missing") | fields status</searchString>
+        <earliestTime>-60m@m</earliestTime>
+        <latestTime>now</latestTime>
+        <option name="drilldown">none</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <single>
+        <title>Local Posix Users</title>
+        <searchString>| inputlookup local_posix_identities | stats dc(user)</searchString>
+        <earliestTime>0</earliestTime>
+        <latestTime/>
+        <option name="list.drilldown">full</option>
+        <option name="list.wrap">1</option>
+        <option name="maxLines">5</option>
+        <option name="raw.drilldown">full</option>
+        <option name="rowNumbers">false</option>
+        <option name="table.drilldown">all</option>
+        <option name="table.wrap">1</option>
+        <option name="type">list</option>
+        <option name="wrap">true</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>Directory Posix Users</title>
+        <searchString>| inputlookup directory_posix_identities | stats dc(user)</searchString>
+        <earliestTime>0</earliestTime>
+        <latestTime/>
+        <option name="drilldown">none</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>Merged Posix Users</title>
+        <searchString>| inputlookup posix_identities | stats dc(user)</searchString>
+        <earliestTime>0</earliestTime>
+        <latestTime/>
+        <option name="drilldown">none</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
+  </row>
+</dashboard>

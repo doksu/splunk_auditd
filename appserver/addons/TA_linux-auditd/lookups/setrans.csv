@@ -1,0 +1,5 @@
+"s_range","c_range","translation"
+"s0","c0","CompanyConfidential"
+"s0","","SystemLow"
+"s0-s0","c0.c1023","SystemLow-SystemHigh"
+"s0","c0.c1023","SystemHigh"

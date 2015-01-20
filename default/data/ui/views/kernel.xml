@@ -1,0 +1,251 @@
+<form refresh="300">
+  <label>Kernel</label>
+  <description/>
+  <fieldset submitButton="true" autoRun="false">
+    <input type="text" token="host" searchWhenChanged="false">
+      <label>Host</label>
+      <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="multiselect" token="category" searchWhenChanged="false">
+      <label>Category</label>
+      <choice value="user">User</choice>
+      <choice value="system">System</choice>
+      <choice value="mac">MAC</choice>
+      <choice value="network">Network</choice>
+      <default>user,system,mac,network</default>
+      <delimiter> OR </delimiter>
+      <valuePrefix>audit_category=</valuePrefix>
+    </input>
+    <input type="multiselect" token="severity" searchWhenChanged="false">
+      <label>Severity</label>
+      <choice value="critical">Critical</choice>
+      <choice value="high">High</choice>
+      <choice value="medium">Medium</choice>
+      <choice value="low">Low</choice>
+      <choice value="informational">Informational</choice>
+      <valuePrefix>severity=</valuePrefix>
+      <delimiter> OR </delimiter>
+      <default>critical,high,medium,low</default>
+    </input>
+    <input type="multiselect" token="type" searchWhenChanged="false">
+      <label>Audit Event Type</label>
+      <choice value="*">All</choice>
+      <populatingSearch earliest="$earliest$" latest="$latest$" fieldForLabel="type" fieldForValue="type">|inputlookup audit_types</populatingSearch>
+      <default>*</default>
+      <valuePrefix>type=</valuePrefix>
+      <delimiter> OR </delimiter>
+    </input>
+    <input type="multiselect" token="action" searchWhenChanged="false">
+      <label>Action</label>
+      <choice value="success">Success</choice>
+      <choice value="failure">Failure</choice>
+      <choice value="unknown">Unknown</choice>
+      <default>success,failure,unknown</default>
+      <valuePrefix>action=</valuePrefix>
+      <delimiter> OR </delimiter>
+    </input>
+    <input type="text" token="user" searchWhenChanged="false">
+      <label>Posix Username</label>
+      <default>*</default>
+    </input>
+    <input type="text" token="other">
+      <label>Other Search Terms</label>
+      <default>(NOT auid=* OR auid&lt;100000)</default>
+      <seed>*</seed>
+    </input>
+    <input type="time" token="time_selector" searchWhenChanged="false">
+      <label/>
+      <default>
+        <earliestTime>-24h@h</earliestTime>
+        <latestTime>now</latestTime>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>Events by Category</title>
+        <searchString>eventtype=auditd_events host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by audit_category</searchString>
+        <earliestTime>$time_selector.earliest$</earliestTime>
+        <latestTime>$time_selector.latest$</latestTime>
+        <option name="linkView">search</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Events by Action</title>
+        <searchString>eventtype=auditd_events host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by action</searchString>
+        <earliestTime>$time_selector.earliest$</earliestTime>
+        <latestTime>$time_selector.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Events by Severity</title>
+        <searchString>eventtype=auditd_events host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by severity</searchString>
+        <earliestTime>$time_selector.earliest$</earliestTime>
+        <latestTime>$time_selector.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Events by Type</title>
+        <searchString>eventtype=auditd_events host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by type</searchString>
+        <earliestTime>$time_selector.earliest$</earliestTime>
+        <latestTime>$time_selector.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Events by Host</title>
+        <searchString>eventtype=auditd_events host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by host</searchString>
+        <earliestTime>$time_selector.earliest$</earliestTime>
+        <latestTime>$time_selector.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Events by User</title>
+        <searchString>eventtype=auditd_events host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by user</searchString>
+        <earliestTime>$time_selector.earliest$</earliestTime>
+        <latestTime>$time_selector.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Events</title>
+        <searchString>eventtype=auditd_events host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | table _time host _raw audit_type_description</searchString>
+        <earliestTime>$time_selector.earliest$</earliestTime>
+        <latestTime>$time_selector.latest$</latestTime>
+        <option name="list.drilldown">full</option>
+        <option name="list.wrap">1</option>
+        <option name="maxLines">5</option>
+        <option name="raw.drilldown">full</option>
+        <option name="rowNumbers">false</option>
+        <option name="table.drilldown">all</option>
+        <option name="table.wrap">1</option>
+        <option name="type">list</option>
+        <option name="wrap">true</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>
