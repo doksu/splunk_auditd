@@ -1,4 +1,4 @@
-<form>
+<form refresh="300">
   <label>System Call</label>
   <description/>
   <fieldset submitButton="true">
@@ -16,7 +16,7 @@
     </input>
     <input type="multiselect" token="syscall">
       <label>System Call</label>
-      <populatingSearch fieldForLabel="system_call" fieldForValue="system_call">| inputlookup arch_syscalls</populatingSearch>
+      <populatingSearch fieldForLabel="system_call" fieldForValue="system_call">| inputlookup arch_syscalls | dedup system_call</populatingSearch>
       <choice value="*">Any</choice>
       <default>*</default>
       <valuePrefix>system_call=</valuePrefix>
