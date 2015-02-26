@@ -28,7 +28,7 @@
         <p>The kernel dashboard provides the means to interrogate different high-level aspects of auditd events. For simplified searching, we have categoried the various types of audit events into four categories: system, mac (Mandatory Access Control), network and user. As part of the CIM mapping, each audit event type has also been assigned a severity. Be sure to look at the description provided with the raw events in the bottom pane for an explanation of the audit message's meaning.</p>
         <p/>
         <h2>System Call Dashboard</h2>
-        <p>The auditd daemon is very flexible and can be configured to log any system call to any resource. For example, if a rule was put in place to audit all writes to /etc/sysconfig/iptables, with this dashboard's auid field resolution it would tell you the user who made the change.</p>
+        <p>The auditd daemon is very flexible and can be configured to log any system call to any resource. For example, if a rule was put in place to audit all writes to /etc/sysconfig/iptables (see auditctl man page for more details), with this dashboard's auid field resolution it would tell you the user who made the change.</p>
         <p/>
         <h2>Type Enforcement Dashboard</h2>
         <p>SELinux is a Mandatory Access Control that provides [Domain] Type Enforcement (TE), Information Flow (MCS/MLS) and Role-Based Access Controls (RBACs). By default, Enterprise Linux uses Type Enforcement and this dashboard provides the means for administrators to interrogate those Access Vector Control (AVC) events across their fleet. It should be noted that among others, the vectors shown in the "Rare Vectors" pane ought to be investigated, as depending on your environment, they may indicate compromise.</p>
@@ -40,7 +40,7 @@
       <single>
         <title>Number of Auditd Hosts</title>
         <searchString>index=* sourcetype=linux:audit OR sourcetype=linux_audit | stats dc(host)</searchString>
-        <earliestTime>-60m@m</earliestTime>
+        <earliestTime>-4h</earliestTime>
         <latestTime>now</latestTime>
         <option name="drilldown">none</option>
         <option name="linkView">search</option>
@@ -50,7 +50,7 @@
       <single>
         <title>TA Status</title>
         <searchString>eventtype=auditd_events | head 1 | eval status=if(isnotnull(severity),"Working","Missing") | fields status</searchString>
-        <earliestTime>-60m@m</earliestTime>
+        <earliestTime>-4h</earliestTime>
         <latestTime>now</latestTime>
         <option name="drilldown">none</option>
         <option name="linkView">search</option>
