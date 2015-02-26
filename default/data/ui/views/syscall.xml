@@ -22,6 +22,13 @@
       <valuePrefix>system_call=</valuePrefix>
       <delimiter> OR </delimiter>
     </input>
+    <input type="checkbox" token="subject_role">
+      <label>Origin</label>
+      <choice value="scontext_role=system_r">System Daemon</choice>
+      <choice value="scontext_role!=system_r">User Process</choice>
+      <delimiter> OR </delimiter>
+      <default>scontext_role=system_r,scontext_role!=system_r</default>
+    </input>
     <input type="multiselect" token="action">
       <label>Action</label>
       <choice value="success">Success</choice>
@@ -46,7 +53,7 @@
     <panel>
       <chart>
         <title>Count by Host</title>
-        <searchString>eventtype=auditd_events type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $action$ $other$ | timechart count by host</searchString>
+        <searchString>eventtype=auditd_events type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by host</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -72,7 +79,7 @@
     <panel>
       <chart>
         <title>Count by User</title>
-        <searchString>eventtype=auditd_events type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $action$ $other$ | timechart count by user</searchString>
+        <searchString>eventtype=auditd_events type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by user</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -100,7 +107,7 @@
     <panel>
       <chart>
         <title>Count by Command</title>
-        <searchString>eventtype=auditd_events type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $action$ $other$ | timechart count by comm</searchString>
+        <searchString>eventtype=auditd_events type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by comm</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -126,7 +133,7 @@
     <panel>
       <chart>
         <title>Count by System Call</title>
-        <searchString>eventtype=auditd_events type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $action$ $other$ | timechart count by system_call</searchString>
+        <searchString>eventtype=auditd_events type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by system_call</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -154,7 +161,7 @@
     <panel>
       <chart>
         <title>Count by Action</title>
-        <searchString>eventtype=auditd_events type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $action$ $other$ | timechart count by action</searchString>
+        <searchString>eventtype=auditd_events type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by action</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -182,7 +189,7 @@
     <panel>
       <table>
         <title>Events</title>
-        <searchString>eventtype=auditd_events type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $action$ $other$ | table _time host user comm system_call action</searchString>
+        <searchString>eventtype=auditd_events type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | table _time host user comm system_call action</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="wrap">true</option>

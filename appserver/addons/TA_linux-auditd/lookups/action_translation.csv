@@ -5,6 +5,6 @@ yes,success
 no,failure
 1,success
 0,failure
-auditallow,success
+permitted,success
 denied,failure
 unknown,unknown
