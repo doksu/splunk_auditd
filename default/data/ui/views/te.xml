@@ -414,7 +414,7 @@
     <panel>
       <table>
         <title>Rare Vectors</title>
-        <searchString>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | eventstats dc(host) as host_count by scontext_domain tcontext_type tclass perm | eventstats count as perm_count by scontext_domain tcontext_type tclass perm | table scontext_domain tcontext_type tclass perm perm_count host_count | sort +perm_count +host_count | head 10</searchString>
+        <searchString>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | eventstats dc(host) as host_count by scontext_domain tcontext_type tclass perm | eventstats count as perm_count by scontext_domain tcontext_type tclass perm | dedup scontext_domain tcontext_type tclass perm perm_count host_count | table scontext_domain tcontext_type tclass perm perm_count host_count | sort +perm_count +host_count | head 10</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="wrap">true</option>
