@@ -1,0 +1,63 @@
+signal_number,signal_name,signal_description
+1,SIGHUP,Hangup
+2,SIGINT,Terminal interrupt
+3,SIGQUIT,Terminal quit
+4,SIGILL,Illegal instruction
+5,SIGTRAP,Trace trap
+6,SIGABRT,Process abort
+7,SIGBUS,BUS error
+8,SIGFPE,Floating-point exception
+9,SIGKILL,Kill
+10,SIGUSR1,User-defined signal 1
+11,SIGSEGV,Segmentation fault
+12,SIGUSR2,User-defined signal 2
+13,SIGPIPE,Broken pipe
+14,SIGALRM,Alarm clock
+15,SIGTERM,Terminate
+16,SIGSTKFLT,Stack fault
+17,SIGCHLD,Child process has stopped or exited
+18,SIGCONT,Continue executing
+19,SIGSTOP,Stop executing
+20,SIGTSTP,Terminal stop
+21,SIGTTIN,Background process trying to read from TTY
+22,SIGTTOU,Background process trying to write to TTY
+23,SIGURG,Urgent condition on socket
+24,SIGXCPU,CPU time limit exceeded
+25,SIGXFSZ,File size limit exceeded
+26,SIGVTALRM,Virtual alarm clock
+27,SIGPROF,Profiling alarm clock
+28,SIGWINCH,Window size change
+29,SIGIO,I/O now possible
+30,SIGPWR,Power failure restart
+31,SIGSYS,Bad system call
+34,SIGRTMIN,Real-time user-defined signal
+35,SIGRTMIN+1,Real-time user-defined signal
+36,SIGRTMIN+2,Real-time user-defined signal
+37,SIGRTMIN+3,Real-time user-defined signal
+38,SIGRTMIN+4,Real-time user-defined signal
+39,SIGRTMIN+5,Real-time user-defined signal
+40,SIGRTMIN+6,Real-time user-defined signal
+41,SIGRTMIN+7,Real-time user-defined signal
+42,SIGRTMIN+8,Real-time user-defined signal
+43,SIGRTMIN+9,Real-time user-defined signal
+44,SIGRTMIN+10,Real-time user-defined signal
+45,SIGRTMIN+11,Real-time user-defined signal
+46,SIGRTMIN+12,Real-time user-defined signal
+47,SIGRTMIN+13,Real-time user-defined signal
+48,SIGRTMIN+14,Real-time user-defined signal
+49,SIGRTMIN+15,Real-time user-defined signal
+50,SIGRTMAX-14,Real-time user-defined signal
+51,SIGRTMAX-13,Real-time user-defined signal
+52,SIGRTMAX-12,Real-time user-defined signal
+53,SIGRTMAX-11,Real-time user-defined signal
+54,SIGRTMAX-10,Real-time user-defined signal
+55,SIGRTMAX-9,Real-time user-defined signal
+56,SIGRTMAX-8,Real-time user-defined signal
+57,SIGRTMAX-7,Real-time user-defined signal
+58,SIGRTMAX-6,Real-time user-defined signal
+59,SIGRTMAX-5,Real-time user-defined signal
+60,SIGRTMAX-4,Real-time user-defined signal
+61,SIGRTMAX-3,Real-time user-defined signal
+62,SIGRTMAX-2,Real-time user-defined signal
+63,SIGRTMAX-1,Real-time user-defined signal
+64,SIGRTMAX,Real-time user-defined signal

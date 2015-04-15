@@ -188,8 +188,8 @@
   <row>
     <panel>
       <table>
-        <title>Events</title>
-        <searchString>eventtype=auditd_events type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | table _time host user comm system_call action</searchString>
+        <title>Correlated Events</title>
+        <searchString>eventtype=auditd_events (type=SYSCALL OR type=PATH OR type=CWD) host=$host$ | transaction host event_id maxpause=1s | search user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | table _time host user ses cwd comm name system_call nametype success</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="wrap">true</option>
