@@ -1,0 +1,9 @@
+/opt/splunk(forwarder)?/bin(/.*)?  --  gen_context(system_u:object_r:splunk_exec_t,s0)
+
+/opt/splunk(forwarder)?/lib(/.*)?    gen_context(system_u:object_r:splunk_t,s0)
+
+/opt/splunk(forwarder)?/openssl(/.*)?    gen_context(system_u:object_r:splunk_t,s0)
+
+/opt/splunk(forwarder)?(/.*)?    gen_context(system_u:object_r:splunk_rw_t,s0)
+
+/etc/rc\.d/init\.d/splunk    --    gen_context(system_u:object_r:splunk_initrc_exec_t,s0)
