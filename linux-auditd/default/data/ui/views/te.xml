@@ -373,7 +373,7 @@
     <input type="radio" token="action">
       <label>Result</label>
       <choice value="denied">Denied</choice>
-      <choice value="permitted">Permitted</choice>
+      <choice value="granted">Granted</choice>
       <default>denied</default>
     </input>
     <input type="time" token="time_selector">
