@@ -5,6 +5,6 @@ yes,success
 no,failure
 1,success
 0,failure
-permitted,success
+granted,success
 denied,failure
 unknown,unknown

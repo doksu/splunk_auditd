@@ -32,6 +32,12 @@
         <p/>
         <h2>Type Enforcement Dashboard</h2>
         <p>SELinux is a Mandatory Access Control that provides [Domain] Type Enforcement (TE), Information Flow (MCS/MLS) and Role-Based Access Controls (RBACs). By default, Enterprise Linux uses Type Enforcement and this dashboard provides the means for administrators to interrogate those Access Vector Control (AVC) events across their fleet. It should be noted that among others, the vectors shown in the "Rare Vectors" pane ought to be investigated, as depending on your environment, they may indicate compromise.</p>
+	<h2>Sudo Dashboard</h2>
+        <p>The use of sudo can be examined using this dashboard.
+        </p>
+	<h2>User TTY Dashboard</h2>
+        <p>Auditd keystroke logging (https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security_Guide/sec-Configuring_PAM_for_Auditing.html) can be easily deciphered using this dashboard.
+	</p>
       </html>
     </panel>
   </row>

@@ -3,6 +3,8 @@
   <view name="kernel" />
   <view name="syscall" />
   <view name="te" />
+  <view name="user_cmd" />
+  <view name="tty" />
   <view name="reports" />
   <view name="search" />
 </nav>
