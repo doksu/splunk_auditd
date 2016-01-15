@@ -7,4 +7,5 @@
   <view name="tty" />
   <view name="reports" />
   <view name="search" />
+  <view name="help" />
 </nav>

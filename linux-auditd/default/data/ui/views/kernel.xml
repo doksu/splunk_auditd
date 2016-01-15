@@ -1,6 +1,6 @@
 <form refresh="300">
   <label>Kernel</label>
-  <description/>
+  <description></description>
   <fieldset submitButton="true" autoRun="false">
     <input type="text" token="host" searchWhenChanged="false">
       <label>Host</label>
@@ -56,7 +56,7 @@
       <seed>*</seed>
     </input>
     <input type="time" token="time_selector" searchWhenChanged="false">
-      <label/>
+      <label></label>
       <default>
         <earliestTime>-24h@h</earliestTime>
         <latestTime>now</latestTime>
@@ -73,7 +73,7 @@
         <option name="linkView">search</option>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
         <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
-	<option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
         <option name="charting.axisTitleY.visibility">collapsed</option>
         <option name="charting.axisTitleY2.visibility">visible</option>
         <option name="charting.axisX.scale">linear</option>
@@ -99,7 +99,7 @@
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
         <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
-	<option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
         <option name="charting.axisTitleY.visibility">collapsed</option>
         <option name="charting.axisTitleY2.visibility">visible</option>
         <option name="charting.axisX.scale">linear</option>
@@ -127,7 +127,7 @@
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
         <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
-	<option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
         <option name="charting.axisTitleY.visibility">collapsed</option>
         <option name="charting.axisTitleY2.visibility">visible</option>
         <option name="charting.axisX.scale">linear</option>
@@ -153,7 +153,7 @@
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
         <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
-	<option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
         <option name="charting.axisTitleY.visibility">collapsed</option>
         <option name="charting.axisTitleY2.visibility">visible</option>
         <option name="charting.axisX.scale">linear</option>
@@ -181,7 +181,7 @@
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
         <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
-	<option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
         <option name="charting.axisTitleY.visibility">collapsed</option>
         <option name="charting.axisTitleY2.visibility">visible</option>
         <option name="charting.axisX.scale">linear</option>
@@ -207,7 +207,7 @@
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
         <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
-	<option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
         <option name="charting.axisTitleY.visibility">collapsed</option>
         <option name="charting.axisTitleY2.visibility">visible</option>
         <option name="charting.axisX.scale">linear</option>

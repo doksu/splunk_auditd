@@ -1,107 +1,158 @@
 <dashboard>
   <label>Welcome</label>
-  <description/>
   <row>
     <panel>
-      <html>
-        <h2>About</h2>
-	<p>Auditd logs are the single richest and most precise source of auditing information available in GNU/Linux, however they are too often underutilised due to their complexity. This app and its TA make that information readily accessible at enterprise-scale in three mobile-friendly dashboards together with various field extractions, lookups and CIM mappings for Enterprise Security. For example, the event below is mostly comprised of easily parsed key-value pairs, however this app uses the "arch" and "syscall" number to resolve the system call made and determine the posix user from the auid ("actual uid" of the user who executed the process) for searching and correlation in Enterprise Security.</p>
-
-        <p>
-          <center>type=SYSCALL msg=audit(1321390138.034:228150): arch=c000003e syscall=62 success=yes exit=0 a0=14a3 a1=0 a2=7fcfa39 a3=12a0 items=0 ppid=19051 pid=19128 auid=3045 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=7643 comm="splunkd" exe="/opt/splunk/bin/splunkd" subj=system_u:system_r:splunk_t:s0 key=(null)</center>
-        </p>
-
-	<p>Each of the dashboards in this app are designed to provide the means to drill down into anomalies or unexpected events occuring across your Linux fleet. Once a dashboard has completed loading, look across the panes to see relationships between, for example, a large spike in events of a particular category and host activity, to determine the origin of issues. Each of the dashboards has been configured to automatically refresh every 5 minutes.</p>
-
-        <p/>
-        <h2>Installation</h2>
-	<p>Auditd events (sourcetype=linux:audit OR sourcetype=linux_audit) are collected using an inputs.conf monitor stanza on /var/log/audit/audit.log with the sourcetype 'linux_audit'. This linux-auditd app and its TA_linux-auditd add-on need only be installed on search heads in environments not using accelerated CIM-based datamodels (ie. if you don't have the Enterprise Security app installed). To install the TA_linux-auditd app, simply copy it from linux-auditd/appserver/addons/ to $SPLUNK_HOME/etc/apps/; restart Splunk; and the "TA Status" pane on the welcome dashboard should display "Working". For your convenience, should it be necessary (ie. for collecting auditd events via syslog), we have included a syslog transform; in that case, uncomment the provided prop in TA_linux-auditd and deploy to your syslog collection heavyforwarder/indexer servers.</p>
-
-        <p>As noted above, the TA will resolve uid values to posix usernames. For this to occur, two lookups require populating. The first contains local users (typically created by package management) and can be extracted from /etc/passwd using the following command: awk -F ':' 'BEGIN {print "uid,user"} {print $3","$1}' /etc/passwd &gt; /opt/splunk/etc/apps/TA_linux-auditd/lookups/local_posix_identities.csv</p>
-
-        <p>The second lookup contains directory users and can be populated by scheduling the following search to run periodically with the SA-ldapsearch app: |ldapsearch search="(&amp;(objectclass=user)(uidNumber=*))" attrs="sAMAccountName,uidNumber" | rename sAMAccountName as user, uidNumber as uid | table uid user | outputlookup directory_posix_identities</p>
-
-        <p>For improved dashboard performance in large environments, it's recommended to create a local eventtypes.conf in the TA_linux-auditd app to override the default "index=*", explicitly specifying the indices where auditd events are stored in your environment.</p>
-        
-        <p/>
-        <h2>Kernel Dashboard</h2>
-        <p>The kernel dashboard provides the means to interrogate different high-level aspects of auditd events. For simplified searching, we have categoried the various types of audit events into four categories: system, mac (Mandatory Access Control), network and user. As part of the CIM mapping, each audit event type has also been assigned a severity. Be sure to look at the description provided with the raw events in the bottom pane for an explanation of the audit message's meaning.</p>
-        <p/>
-        <h2>System Call Dashboard</h2>
-        <p>The auditd daemon is very flexible and can be configured to log any system call to any resource. For example, if a rule was put in place to audit all writes to /etc/sysconfig/iptables (see auditctl man page for more details), with this dashboard's auid field resolution it would tell you the user who made the change.</p>
-        <p/>
-        <h2>Type Enforcement Dashboard</h2>
-        <p>SELinux is a Mandatory Access Control that provides [Domain] Type Enforcement (TE), Information Flow (MCS/MLS) and Role-Based Access Controls (RBACs). By default, Enterprise Linux uses Type Enforcement and this dashboard provides the means for administrators to interrogate those Access Vector Control (AVC) events across their fleet. It should be noted that among others, the vectors shown in the "Rare Vectors" pane ought to be investigated, as depending on your environment, they may indicate compromise.</p>
-	<h2>Sudo Dashboard</h2>
-        <p>The use of sudo can be examined using this dashboard.
-        </p>
-	<h2>User TTY Dashboard</h2>
-        <p>Auditd keystroke logging (https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security_Guide/sec-Configuring_PAM_for_Auditing.html) can be easily deciphered using this dashboard.
-	</p>
-      </html>
+      <title>Canaries of Compromise</title>
+      <single>
+        <title>Number of Hosts</title>
+        <search>
+          <query>eventtype=auditd_events | timechart dc(host)</query>
+          <earliest>-24h@h</earliest>
+          <latest>@h</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="colorBy">trend</option>
+        <option name="colorMode">block</option>
+        <option name="numberPrecision">0</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+        <option name="linkView">search</option>
+        <option name="rangeColors">["0x65a637","0x6db7c6","0xf7bc38","0xf58f39","0xd93f3c"]</option>
+        <option name="rangeValues">[0,30,70,100]</option>
+        <option name="trendInterval">auto</option>
+        <option name="underLabel">seen in the last 24hrs</option>
+      </single>
+      <single>
+        <title>Number of Event Types</title>
+        <search>
+          <query>eventtype=auditd_events | timechart span=4h dc(type)</query>
+          <earliest>-24h@h</earliest>
+          <latest>@h</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="colorBy">trend</option>
+        <option name="colorMode">block</option>
+        <option name="numberPrecision">0</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trendColorInterpretation">inverse</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+        <option name="linkView">search</option>
+        <option name="rangeColors">["0x65a637","0x6db7c6","0xf7bc38","0xf58f39","0xd93f3c"]</option>
+        <option name="rangeValues">[0,30,70,100]</option>
+        <option name="trendInterval">auto</option>
+        <option name="underLabel">compared with the previous 4hrs</option>
+      </single>
+      <single>
+        <title>Anomalous Event Volume</title>
+        <search>
+          <query>eventtype=auditd_events | timechart span=1h count | predict count as prediction upper95=upper lower95=lower future_timespan=0 | eval difference=case(count&gt;lower AND count&lt;upper, 0, count&lt;lower, round((count-lower)/prediction,1), count&gt;upper, round((count-upper)/prediction,1)) | search difference=* | table _time difference</query>
+          <earliest>-24h@h</earliest>
+          <latest>@h</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="colorBy">value</option>
+        <option name="colorMode">block</option>
+        <option name="numberPrecision">0.0</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">0</option>
+        <option name="linkView">search</option>
+        <option name="rangeColors">["0xd93f3c","0xf58f39","0x65a637","0x6db7c6","0xf58f39","0xd93f3c"]</option>
+        <option name="rangeValues">[-2,-1,0,1,2]</option>
+        <option name="trendInterval">auto</option>
+        <option name="underLabel">magnitude relative to trend</option>
+      </single>
+      <single>
+        <title>Access Vector Anomalies</title>
+        <search>
+          <query>eventtype=auditd_events type=*AVC | eventstats count by scontext_domain tcontext_type | timechart span=1h count(eval(count==1)) as foo</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="colorBy">value</option>
+        <option name="colorMode">block</option>
+        <option name="numberPrecision">0</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+        <option name="linkView">search</option>
+        <option name="rangeColors">["0x65a637","0xf7bc38","0xf58f39","0xd93f3c"]</option>
+        <option name="rangeValues">[0,1,2]</option>
+        <option name="trendInterval">auto</option>
+        <option name="underLabel">detected in the last hour</option>
+      </single>
+      <single>
+        <title>Event Type Anomalies</title>
+        <search>
+          <query>eventtype=auditd_events | timechart count(eval(eventtype==auditd_anomaly OR severity=="critical" OR severity=="high" OR tcontext_type=="shadow_t")) as count</query>
+          <earliest>-24h@h</earliest>
+          <latest>@h</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="colorBy">value</option>
+        <option name="colorMode">block</option>
+        <option name="numberPrecision">0</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+        <option name="linkView">search</option>
+        <option name="rangeColors">["0x65a637","0xd93f3c"]</option>
+        <option name="rangeValues">[0]</option>
+        <option name="trendInterval">auto</option>
+        <option name="underLabel">detected in the last hour</option>
+      </single>
     </panel>
   </row>
   <row>
     <panel>
-      <single>
-        <title>Number of Auditd Hosts</title>
-        <searchString>index=* sourcetype=linux:audit OR sourcetype=linux_audit | stats dc(host)</searchString>
-        <earliestTime>-24h</earliestTime>
-        <latestTime>now</latestTime>
-        <option name="drilldown">none</option>
-        <option name="linkView">search</option>
-      </single>
-    </panel>
-    <panel>
-      <single>
-        <title>TA Status</title>
-        <searchString>eventtype=auditd_events | head 1 | eval status=if(isnotnull(severity),"Working","Missing") | fields status</searchString>
-        <earliestTime>-4h</earliestTime>
-        <latestTime>now</latestTime>
-        <option name="drilldown">none</option>
-        <option name="linkView">search</option>
-      </single>
-    </panel>
-  </row>
-  <row>
-    <panel>
-      <single>
-        <title>Local Posix Users</title>
-        <searchString>| inputlookup local_posix_identities | stats dc(user)</searchString>
-        <earliestTime>0</earliestTime>
-        <latestTime/>
-        <option name="list.drilldown">full</option>
-        <option name="list.wrap">1</option>
-        <option name="maxLines">5</option>
-        <option name="raw.drilldown">full</option>
-        <option name="rowNumbers">false</option>
-        <option name="table.drilldown">all</option>
-        <option name="table.wrap">1</option>
-        <option name="type">list</option>
-        <option name="wrap">true</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="linkView">search</option>
-      </single>
-    </panel>
-    <panel>
-      <single>
-        <title>Directory Posix Users</title>
-        <searchString>| inputlookup directory_posix_identities | stats dc(user)</searchString>
-        <earliestTime>0</earliestTime>
-        <latestTime/>
-        <option name="drilldown">none</option>
-      </single>
-    </panel>
-    <panel>
-      <single>
-        <title>Merged Posix Users</title>
-        <searchString>| inputlookup posix_identities | stats dc(user)</searchString>
-        <earliestTime>0</earliestTime>
-        <latestTime/>
-        <option name="drilldown">none</option>
-        <option name="linkView">search</option>
-      </single>
+      <chart>
+        <title>Domain Activity</title>
+        <search>
+          <query>eventtype=auditd_events | chart count by scontext_domain,action | eval total=failure+success | table scontext_domain failure success total</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">bubble</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">log</option>
+        <option name="charting.axisY.scale">log</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
     </panel>
   </row>
 </dashboard>

@@ -1,6 +1,6 @@
 <form refresh="300">
   <label>Type Enforcement</label>
-  <description/>
+  <description></description>
   <fieldset submitButton="true">
     <input type="text" token="host">
       <label>Host</label>
@@ -377,7 +377,7 @@
       <default>denied</default>
     </input>
     <input type="time" token="time_selector">
-      <label/>
+      <label></label>
       <default>
         <earliestTime>-24h@h</earliestTime>
         <latestTime>now</latestTime>

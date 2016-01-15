@@ -1,0 +1,14 @@
+
+## shared Application-level permissions
+[]
+access = read : [ * ], write : [ admin ]
+export = system
+
+[savedsearches]
+owner = admin
+
+[correlationsearches]
+access = read : [ * ], write : [ * ]
+
+[governance]
+access = read : [ * ], write : [ * ]
