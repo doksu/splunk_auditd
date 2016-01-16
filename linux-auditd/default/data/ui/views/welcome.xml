@@ -1,4 +1,4 @@
-<dashboard>
+<dashboard refresh="300">
   <label>Welcome</label>
   <row>
     <panel>
@@ -6,9 +6,9 @@
       <single>
         <title>Number of Hosts</title>
         <search>
-          <query>eventtype=auditd_events | timechart dc(host)</query>
-          <earliest>-24h@h</earliest>
-          <latest>@h</latest>
+          <query>| tstats dc(host) WHERE sourcetype=linux:audit BY _time span=1d</query>
+          <earliest>-7d@h</earliest>
+          <latest>now</latest>
         </search>
         <option name="drilldown">none</option>
         <option name="colorBy">trend</option>
@@ -24,12 +24,12 @@
         <option name="rangeColors">["0x65a637","0x6db7c6","0xf7bc38","0xf58f39","0xd93f3c"]</option>
         <option name="rangeValues">[0,30,70,100]</option>
         <option name="trendInterval">auto</option>
-        <option name="underLabel">seen in the last 24hrs</option>
+        <option name="underLabel">seen in the last day</option>
       </single>
       <single>
         <title>Number of Event Types</title>
         <search>
-          <query>eventtype=auditd_events | timechart span=4h dc(type)</query>
+          <query>| pivot Auditd Auditd dc(type) as dc SPLITROW _time PERIOD hour | timechart span=4h sum(dc)</query>
           <earliest>-24h@h</earliest>
           <latest>@h</latest>
         </search>
@@ -52,9 +52,9 @@
       <single>
         <title>Anomalous Event Volume</title>
         <search>
-          <query>eventtype=auditd_events | timechart span=1h count | predict count as prediction upper95=upper lower95=lower future_timespan=0 | eval difference=case(count&gt;lower AND count&lt;upper, 0, count&lt;lower, round((count-lower)/prediction,1), count&gt;upper, round((count-upper)/prediction,1)) | search difference=* | table _time difference</query>
-          <earliest>-24h@h</earliest>
-          <latest>@h</latest>
+          <query>| tstats count WHERE sourcetype=linux:audit BY _time span=1h | predict count as prediction upper95=upper lower95=lower future_timespan=0 | eval difference=case(count&gt;lower AND count&lt;upper, 0, count&lt;lower, round((count-lower)/prediction,1), count&gt;upper, round((count-upper)/prediction,1)) | search difference=* | table _time difference</query>
+          <earliest>-7d@h</earliest>
+          <latest>now</latest>
         </search>
         <option name="drilldown">none</option>
         <option name="colorBy">value</option>
@@ -75,7 +75,7 @@
       <single>
         <title>Access Vector Anomalies</title>
         <search>
-          <query>eventtype=auditd_events type=*AVC | eventstats count by scontext_domain tcontext_type | timechart span=1h count(eval(count==1)) as foo</query>
+          <query>| pivot Auditd AVC count(type) AS count SPLITROW _time PERIOD hour SPLITROW scontext_domain SPLITROW tcontext_type | timechart span=1h count(eval(count==1)) as indicator</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
         </search>
@@ -123,9 +123,9 @@
   <row>
     <panel>
       <chart>
-        <title>Domain Activity</title>
+        <title>Domain activity in the last 24hrs</title>
         <search>
-          <query>eventtype=auditd_events | chart count by scontext_domain,action | eval total=failure+success | table scontext_domain failure success total</query>
+          <query>| pivot Auditd Auditd count(type) AS count SPLITROW _time PERIOD hour SPLITROW scontext_domain SPLITCOL action | eval total=failure+success | table scontext_domain failure success total</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
         </search>

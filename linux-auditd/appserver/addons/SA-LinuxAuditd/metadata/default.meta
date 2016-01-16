@@ -12,3 +12,6 @@ access = read : [ * ], write : [ * ]
 
 [governance]
 access = read : [ * ], write : [ * ]
+
+[models]
+export = system
