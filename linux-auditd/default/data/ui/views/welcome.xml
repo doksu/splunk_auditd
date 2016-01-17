@@ -125,7 +125,7 @@
       <chart>
         <title>Domain activity in the last 24hrs</title>
         <search>
-          <query>| pivot Auditd Auditd count(type) AS count SPLITROW _time PERIOD hour SPLITROW scontext_domain SPLITCOL action | eval total=failure+success | table scontext_domain failure success total</query>
+          <query>| pivot Auditd Auditd count(type) AS count SPLITROW scontext_domain SPLITCOL action | eval total=failure+success | table scontext_domain failure success total</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
         </search>
