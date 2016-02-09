@@ -1,5 +1,5 @@
 <dashboard refresh="300">
-  <label>Welcome</label>
+  <label>Security Operations Centre</label>
   <row>
     <panel>
       <title>Canaries of Compromise</title>

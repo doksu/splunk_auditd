@@ -1,5 +1,5 @@
 <nav search_view="search" color="#CC6699">
-  <view name="welcome" default='true' />
+  <view name="soc" default='true' />
   <view name="kernel" />
   <view name="syscall" />
   <view name="te" />

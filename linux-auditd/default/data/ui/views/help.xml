@@ -4,7 +4,7 @@
   <row>
     <panel>
       <html>
-        <p>Foo</p>
+        <p>The latest installation, configuration and usage instructions can be found in the <a href="https://github.com/doksu/splunk_auditd/wiki" target="_blank">Linux Auditd Wiki</a>.</p>
       </html>
     </panel>
   </row>
@@ -77,6 +77,15 @@
       <single>
         <title>Directory Posix Users</title>
         <searchString>| inputlookup directory_posix_identities | stats dc(user)</searchString>
+        <earliestTime>0</earliestTime>
+        <latestTime></latestTime>
+        <option name="drilldown">none</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>Learnt Posix Users</title>
+        <searchString>| inputlookup learnt_posix_identities | stats dc(_key)</searchString>
         <earliestTime>0</earliestTime>
         <latestTime></latestTime>
         <option name="drilldown">none</option>
