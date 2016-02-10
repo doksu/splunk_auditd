@@ -75,8 +75,8 @@
       <single>
         <title>Access Vector Anomalies</title>
         <search>
-          <query>| pivot Auditd AVC count(type) AS count SPLITROW _time PERIOD hour SPLITROW scontext_domain SPLITROW tcontext_type | timechart span=1h count(eval(count==1)) as indicator</query>
-          <earliest>-24h@h</earliest>
+          <query>| pivot Auditd AVC values(tcontext_type) AS tcontext_type SPLITROW _time PERIOD hour SPLITROW scontext_domain | mvexpand tcontext_type | eventstats count by scontext_domain, tcontext_type | timechart count(eval(count==1)) as indicator</query>
+          <earliest>-72h</earliest>
           <latest>now</latest>
         </search>
         <option name="drilldown">none</option>
