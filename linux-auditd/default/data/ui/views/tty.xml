@@ -25,7 +25,7 @@
     <panel>
       <table>
         <search>
-          <query>eventtype=auditd_events type="USER_TTY" host=$host$ user=$user$ ses=$session$ | lookup posix_identities uid OUTPUT user AS effective_user | rename ses as session | table _time host user session effective_user keystrokes | sort 0 +_time</query>
+          <query>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type="USER_TTY" host=$host$ user=$user$ ses=$session$ | lookup posix_identities uid OUTPUT user AS effective_user | rename ses as session | table _time host user session effective_user keystrokes | sort 0 +_time</query>
           <earliest>$time_selector.earliest$</earliest>
           <latest>$time_selector.latest$</latest>
         </search>

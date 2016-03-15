@@ -388,7 +388,7 @@
     <panel>
       <chart>
         <title>Event Count by Host</title>
-        <searchString>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | top host</searchString>
+        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | top host</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -415,7 +415,7 @@
       <table>
         <title>Rare Vectors</title>
         <search>
-          <query>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | eventstats count as perm_count by scontext_domain tcontext_type tclass perm | where count==1 | table scontext_domain tcontext_type tclass perm | head 10</query>
+          <query>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | eventstats count as perm_count by scontext_domain tcontext_type tclass perm | where count==1 | table scontext_domain tcontext_type tclass perm | head 10</query>
           <earliest>$time_selector.earliest$</earliest>
           <latest>$time_selector.latest$</latest>
         </search>
@@ -431,7 +431,7 @@
     <panel>
       <table>
         <title>Top 5 Most Common Vectors by Hosts</title>
-        <searchString>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | eventstats dc(host) as host_count by scontext_domain tcontext_type tclass perm | dedup host_count | sort -host_count | table host_count scontext_domain tcontext_type tclass perm | head 5</searchString>
+        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | eventstats dc(host) as host_count by scontext_domain tcontext_type tclass perm | dedup host_count | sort -host_count | table host_count scontext_domain tcontext_type tclass perm | head 5</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="list.drilldown">full</option>
@@ -451,7 +451,7 @@
     <panel>
       <table>
         <title>Top 5 Most Common Vectors Overall</title>
-        <searchString>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | top limit=5 scontext_domain tcontext_type tclass perm</searchString>
+        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | top limit=5 scontext_domain tcontext_type tclass perm</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="wrap">true</option>
@@ -484,7 +484,7 @@
     <panel>
       <chart>
         <title>Top Domains by AVC Count</title>
-        <searchString>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | top scontext_domain</searchString>
+        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | top scontext_domain</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -510,7 +510,7 @@
     <panel>
       <chart>
         <title>Top Domains by Distinct AVC Count</title>
-        <searchString>eventtype=auditd_events type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | stats dc(tcontext_type) by scontext_domain</searchString>
+        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | stats dc(tcontext_type) by scontext_domain</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="wrap">true</option>
@@ -542,7 +542,7 @@
     <panel>
       <table>
         <title>Correlated Events</title>
-        <searchString>eventtype=auditd_events type=AVC OR type=SYSCALL | transaction host event_id maxpause=1s | eval object=coalesce(name,path,dest,capability) | search type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | table _time host user comm scontext_domain tcontext_type tclass perm object avc_result success</searchString>
+        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type=AVC OR type=SYSCALL | transaction host event_id maxpause=1s | eval object=coalesce(name,path,dest,capability) | search type=AVC $action$ host=$host$ scontext_domain=$s_domain$ tcontext_type=$t_type$ ($class$) ($permission$) $other$ | table _time host user comm scontext_domain tcontext_type tclass perm object avc_result success</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>

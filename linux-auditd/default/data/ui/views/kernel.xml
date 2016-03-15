@@ -67,7 +67,7 @@
     <panel>
       <chart>
         <title>Events by Category</title>
-        <searchString>eventtype=auditd_events host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by audit_category</searchString>
+        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by audit_category</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="linkView">search</option>
@@ -94,7 +94,7 @@
     <panel>
       <chart>
         <title>Events by Action</title>
-        <searchString>eventtype=auditd_events host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by action</searchString>
+        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by action</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -122,7 +122,7 @@
     <panel>
       <chart>
         <title>Events by Severity</title>
-        <searchString>eventtype=auditd_events host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by severity</searchString>
+        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by severity</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -148,7 +148,7 @@
     <panel>
       <chart>
         <title>Events by Type</title>
-        <searchString>eventtype=auditd_events host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by type</searchString>
+        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by type</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -176,7 +176,7 @@
     <panel>
       <chart>
         <title>Events by Host</title>
-        <searchString>eventtype=auditd_events host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by host</searchString>
+        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by host</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -202,7 +202,7 @@
     <panel>
       <chart>
         <title>Events by User</title>
-        <searchString>eventtype=auditd_events host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by user</searchString>
+        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | timechart count by user</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -230,7 +230,7 @@
     <panel>
       <table>
         <title>Events</title>
-        <searchString>eventtype=auditd_events host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | table _time host _raw audit_type_description</searchString>
+        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | table _time host _raw audit_type_description</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="list.drilldown">full</option>

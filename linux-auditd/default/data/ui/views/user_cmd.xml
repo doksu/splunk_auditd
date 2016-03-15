@@ -34,7 +34,7 @@
     <panel>
       <table>
         <search>
-          <query>eventtype=auditd_events type="USER_CMD" host=$host$ user=$user$ ($action$) $other$ | table _time host user cwd command action</query>
+          <query>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type="USER_CMD" host=$host$ user=$user$ ($action$) $other$ | table _time host user cwd command action</query>
           <earliest>$time_selector.earliest$</earliest>
           <latest>$time_selector.latest$</latest>
         </search>
