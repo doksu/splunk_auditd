@@ -5,7 +5,9 @@
   <view name="te" />
   <view name="user_cmd" />
   <view name="tty" />
+  <view name="host" />
   <view name="reports" />
   <view name="search" />
   <view name="help" />
+  <view name="configure" />
 </nav>
