@@ -63,6 +63,31 @@
         <option name="linkView">search</option>
       </single>
     </panel>
+    <panel>
+      <title>Uptime</title>
+      <single>
+        <search>
+          <query>| pivot Auditd Auditd latest(_time) as time FILTER type in (SYSTEM_BOOT,DAEMON_START) FILTER host is "li1452-117.members.linode.com" | convert timeformat="%Y-%m-%dT%H:%M:%S.%3N%z" mktime(time) as epoch | eval minutes_since_boot=(now()-epoch)/60 | eval boot_time=case(minutes_since_boot&lt;60,round(minutes_since_boot)." minute/s",minutes_since_boot&lt;3600,round(minutes_since_boot/60)." hour/s",minutes_since_boot&gt;=3600,round(minutes_since_boot/60/24)." day/s") | table boot_time</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="wrap">undefined</option>
+        <option name="rowNumbers">undefined</option>
+        <option name="drilldown">none</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="useColors">0</option>
+        <option name="useThousandSeparators">1</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
   </row>
   <row>
     <panel>
@@ -78,6 +103,19 @@
         <option name="drilldown">cell</option>
         <option name="dataOverlayMode">none</option>
         <option name="count">10</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Process Crashes (last 24 hours)</title>
+      <table>
+        <search>
+          <query>[| inputlookup auditd_indicies] [| inputlookup auditd_sourcetypes] type=ANOM_ABEND | table _time process signal_description</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">undefined</option>
+        <option name="rowNumbers">undefined</option>
+        <option name="drilldown">row</option>
       </table>
     </panel>
   </row>
