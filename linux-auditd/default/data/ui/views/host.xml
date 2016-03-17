@@ -15,7 +15,7 @@
       <title>Operating System</title>
       <single>
         <search>
-          <query>| inputlookup auditd_host_inventory | rename _key as host | search host=$host|s$* | lookup distribution_release distribution_release OUTPUT distribution_name | table distribution_name</query>
+          <query>| inputlookup auditd_host_inventory | rename _key as host | search host=$host|s$ | lookup distribution_release distribution_release OUTPUT distribution_name | table distribution_name</query>
           <earliest>0</earliest>
           <latest></latest>
         </search>
@@ -26,7 +26,7 @@
       <title>Kernel</title>
       <single>
         <search>
-          <query>| inputlookup auditd_host_inventory | rename _key as host | search host=$host|s$* | eval kernel=kernel_version+" ("+architecture+")" | table kernel</query>
+          <query>| inputlookup auditd_host_inventory | rename _key as host | search host=$host|s$ | eval kernel=kernel_version+" ("+architecture+")" | table kernel</query>
           <earliest>0</earliest>
           <latest></latest>
         </search>
@@ -47,7 +47,7 @@
       <title>IP Address</title>
       <single>
         <search>
-          <query>| inputlookup auditd_host_inventory | rename _key as host | search host=$host|s$* | lookup dnslookup clienthost as host | fields clientip</query>
+          <query>| inputlookup auditd_host_inventory | rename _key as host | search host=$host|s$ | lookup dnslookup clienthost as host | fields clientip</query>
           <earliest>0</earliest>
         </search>
         <option name="drilldown">none</option>
@@ -64,10 +64,10 @@
       </single>
     </panel>
     <panel>
-      <title>Uptime</title>
+      <title>Auditd Uptime</title>
       <single>
         <search>
-          <query>| pivot Auditd Auditd latest(_time) as time FILTER type in (SYSTEM_BOOT,DAEMON_START) FILTER host is "li1452-117.members.linode.com" | convert timeformat="%Y-%m-%dT%H:%M:%S.%3N%z" mktime(time) as epoch | eval minutes_since_boot=(now()-epoch)/60 | eval boot_time=case(minutes_since_boot&lt;60,round(minutes_since_boot)." minute/s",minutes_since_boot&lt;3600,round(minutes_since_boot/60)." hour/s",minutes_since_boot&gt;=3600,round(minutes_since_boot/60/24)." day/s") | table boot_time</query>
+          <query>| pivot Auditd Auditd latest(_time) as time FILTER type in (SYSTEM_BOOT,DAEMON_START) FILTER host is "$host|s$" | convert timeformat="%Y-%m-%dT%H:%M:%S.%3N%z" mktime(time) as epoch | eval minutes_since_boot=(now()-epoch)/60 | eval uptime=case(minutes_since_boot&lt;60,round(minutes_since_boot)." minute/s",minutes_since_boot&lt;3600,round(minutes_since_boot/60)." hour/s",minutes_since_boot&gt;=3600,round(minutes_since_boot/60/24)." day/s") | table uptime</query>
           <earliest>0</earliest>
           <latest></latest>
         </search>
@@ -94,7 +94,7 @@
       <title>Top Users (last 7 days)</title>
       <table>
         <search>
-          <query>| pivot Auditd Auditd count(Auditd) as login_count SPLITROW user FILTER type is USER_LOGIN FILTER action is success FILTER host is $host|s$* | sort -login_count</query>
+          <query>| pivot Auditd Auditd count(Auditd) as login_count SPLITROW user FILTER type is USER_LOGIN FILTER action is success FILTER host is $host|s$ | sort -login_count</query>
           <earliest>-7d@h</earliest>
           <latest>now</latest>
         </search>
@@ -124,7 +124,7 @@
       <title>Event count by severity (last 7 days)</title>
       <chart>
         <search>
-          <query>| pivot Auditd Auditd count(Auditd) as count SPLITROW _time PERIOD hour SPLITROW severity FILTER host is $host|s$* | timechart sum(count) as total by severity</query>
+          <query>| pivot Auditd Auditd count(Auditd) as count SPLITROW _time PERIOD hour SPLITROW severity FILTER host is $host|s$ | timechart sum(count) as total by severity</query>
           <earliest>-7d@h</earliest>
           <latest>now</latest>
         </search>
