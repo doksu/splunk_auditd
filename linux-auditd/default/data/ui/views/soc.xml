@@ -102,7 +102,7 @@
       <title>Auditd Host Changes</title>
       <table>
         <search>
-          <query>| set diff [| tstats values(host) AS host WHERE earliest=-24h sourcetype=linux*audit] [| inputlookup auditd_hosts] | lookup auditd_hosts host OUTPUT host AS host2 | eval status=if(isnull(host2),"new","missing") | table host status</query>
+          <query>| set diff [| tstats values(host) AS host WHERE earliest=-24h sourcetype=linux*audit] [| inputlookup auditd_hosts] | search NOT [|inputlookup auditd_decommissioned_hosts]| lookup auditd_hosts host OUTPUT host AS host2 | eval status=if(isnull(host2),"new","missing") | table host status</query>
           <earliest>0</earliest>
           <latest></latest>
         </search>
