@@ -13,6 +13,34 @@
   <row>
     <panel>
       <table>
+        <title>auditd_hosts lookup</title>
+        <search>
+          <query>| tstats values(host) as host where [|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] | outputlookup auditd_hosts</query>
+          <earliest>$time_selector.earliest$</earliest>
+          <latest>$time_selector.latest$</latest>
+        </search>
+        <option name="wrap">undefined</option>
+        <option name="rowNumbers">undefined</option>
+        <option name="drilldown">row</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>auditd_host_inventory KVStore collection</title>
+        <search>
+          <query>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type="DAEMON_START" | dedup host | rex field=kernel "^(?&lt;kernel_version&gt;.+)\.(?&lt;distribution_release&gt;.+)\.(?&lt;architecture&gt;.+)$" | table host kernel_version distribution_release architecture | rename host as _key | outputlookup append=true auditd_host_inventory</query>
+          <earliest>$time_selector.earliest$</earliest>
+          <latest>$time_selector.latest$</latest>
+        </search>
+        <option name="wrap">undefined</option>
+        <option name="rowNumbers">undefined</option>
+        <option name="drilldown">row</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
         <title>learnt_posix_identities KVStore collection</title>
         <search>
           <query>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type="USER_START" acct=* NOT acct=root NOT auid=0 terminal=/dev/tty* OR NOT addr=? | dedup auid | table auid acct | rename auid as _key | rename acct as user | outputlookup append=true learnt_posix_identities</query>
@@ -28,24 +56,9 @@
     </panel>
     <panel>
       <table>
-        <title>auditd_hosts lookup</title>
+        <title>auditd_indicies lookup</title>
         <search>
-          <query>| tstats values(host) as host where [|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] | outputlookup auditd_hosts</query>
-          <earliest>$time_selector.earliest$</earliest>
-          <latest>$time_selector.latest$</latest>
-        </search>
-        <option name="wrap">undefined</option>
-        <option name="rowNumbers">undefined</option>
-        <option name="drilldown">row</option>
-      </table>
-    </panel>
-  </row>
-  <row>
-    <panel>
-      <table>
-        <title>auditd_host_inventory KVStore collection</title>
-        <search>
-          <query>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type="DAEMON_START" | dedup host | rex field=kernel "^(?&lt;kernel_version&gt;.+)\.(?&lt;distribution_release&gt;.+)\.(?&lt;architecture&gt;.+)$" | table host kernel_version distribution_release architecture | rename host as _key | outputlookup append=true auditd_host_inventory</query>
+          <query>| tstats values(sourcetype) as sourcetype where [|inputlookup auditd_sourcetypes] by index | table index | outputlookup auditd_indicies</query>
           <earliest>$time_selector.earliest$</earliest>
           <latest>$time_selector.latest$</latest>
         </search>
