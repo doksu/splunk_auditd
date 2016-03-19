@@ -76,8 +76,8 @@
         <title>Event Type Anomalies</title>
         <search>
           <query>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] | timechart count(eval(eventtype==auditd_anomaly OR severity=="critical" OR severity=="high" OR tcontext_type=="shadow_t")) as count</query>
-          <earliest>-24h@h</earliest>
-          <latest>@h</latest>
+          <earliest>-72h@h</earliest>
+          <latest>now</latest>
         </search>
         <option name="drilldown">none</option>
         <option name="colorBy">value</option>
@@ -102,13 +102,15 @@
       <title>Auditd Host Changes</title>
       <table>
         <search>
-          <query>| set diff [| tstats values(host) AS host WHERE earliest=-24h sourcetype=linux*audit] [| inputlookup auditd_hosts] | search NOT [|inputlookup auditd_decommissioned_hosts]| lookup auditd_hosts host OUTPUT host AS host2 | eval status=if(isnull(host2),"new","missing") | table host status</query>
+          <query>| set diff [| tstats values(host) AS host WHERE earliest=-24h sourcetype=linux*audit] [| inputlookup auditd_hosts] | lookup auditd_hosts host OUTPUT host AS host2 | eval status=if(isnull(host2),"new","missing") | table host status</query>
           <earliest>0</earliest>
-          <latest></latest>
         </search>
         <option name="wrap">true</option>
         <option name="rowNumbers">false</option>
-        <option name="drilldown">cell</option>
+        <option name="drilldown">row</option>
+        <drilldown>
+          <link>host?host=$row.host$</link>
+        </drilldown>
         <option name="dataOverlayMode">none</option>
         <option name="count">10</option>
       </table>
@@ -117,9 +119,9 @@
       <title>Anomalous Event Volume</title>
       <table>
         <search>
-          <query>| tstats count WHERE [|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] BY _time span=1h | predict count as prediction upper95=upper lower95=lower future_timespan=0 | eval difference=case(count&gt;lower AND count&lt;upper, 0, count&lt;lower, round((count-lower)/prediction,1), count&gt;upper, round((count-upper)/prediction,1)) | search difference=* difference!=0 | table _time difference</query>
-          <earliest>0</earliest>
-          <latest></latest>
+          <query>| tstats count WHERE [|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] BY _time span=1h | predict count as prediction upper95=upper lower95=lower future_timespan=0 | eval difference=case(count&gt;lower AND count&lt;upper, 0, count&lt;lower, round((count-lower)/prediction,1), count&gt;upper, round((count-upper)/prediction,1)) | search difference&gt;1 OR difference&lt;-1 | table _time difference</query>
+          <earliest>-7d@h</earliest>
+          <latest>now</latest>
         </search>
         <option name="wrap">true</option>
         <option name="rowNumbers">false</option>
@@ -141,7 +143,10 @@
         </search>
         <option name="wrap">true</option>
         <option name="rowNumbers">false</option>
-        <option name="drilldown">cell</option>
+        <option name="drilldown">row</option>
+        <drilldown>
+          <link>search?earliest=-72h&amp;q=`avc_table(*,$row.scontext_domain$)`</link>
+        </drilldown>
         <option name="dataOverlayMode">none</option>
         <option name="count">10</option>
       </table>
