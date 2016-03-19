@@ -4,15 +4,18 @@
 []
 access = read : [ * ], write : [ admin, power ]
 
+
 ### EVENT TYPES
 
 [eventtypes]
 export = system
 
+
 ### TAGS
 
 [tags]
 export = system
+
 
 ### PROPS
 
@@ -35,6 +38,12 @@ export = system
 ### COLLECTIONS
 [collections]
 export = system
+
+
+### DATAMODELS
+[models]
+export = system
+
 
 ### VIEWSTATES: even normal users should be able to create shared viewstates
 
