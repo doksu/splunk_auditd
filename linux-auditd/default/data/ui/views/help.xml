@@ -102,4 +102,21 @@
       </single>
     </panel>
   </row>
+  <row>
+    <panel>
+      <table>
+        <title>uid conflicts</title>
+        <search>
+          <query>| inputlookup directory_posix_identities | eval source="directory" | append [|inputlookup local_posix_identities | eval source="local"] | append[|inputlookup learnt_posix_identities | rename _key as uid | eval source="learnt"] | eventstats dc(user) as dc by uid | where dc&gt;1 | fields - dc | sort 0 +uid</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
 </dashboard>
