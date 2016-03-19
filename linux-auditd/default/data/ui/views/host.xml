@@ -67,7 +67,7 @@
       <title>Auditd Uptime</title>
       <single>
         <search>
-          <query>| pivot Auditd Auditd latest(_time) as time FILTER type in (SYSTEM_BOOT,DAEMON_START) FILTER host is "$host|s$" | convert timeformat="%Y-%m-%dT%H:%M:%S.%3N%z" mktime(time) as epoch | eval minutes_since_boot=(now()-epoch)/60 | eval uptime=case(minutes_since_boot&lt;60,round(minutes_since_boot)." minute/s",minutes_since_boot&lt;3600,round(minutes_since_boot/60)." hour/s",minutes_since_boot&gt;=3600,round(minutes_since_boot/60/24)." day/s") | table uptime</query>
+          <query>| pivot Auditd Auditd latest(_time) as time FILTER type in (SYSTEM_BOOT,DAEMON_START,SYSTEM_SHUTDOWN,DAEMON_END) FILTER host is $host$ SPLITROW type | convert timeformat="%Y-%m-%dT%H:%M:%S.%3N%z" mktime(time) as epoch | eval minutes_since=(now()-epoch)/60 | eval period=case(minutes_since&lt;60,round(minutes_since)." minute/s",minutes_since&lt;3600,round(minutes_since/60)." hour/s",minutes_since&gt;=3600,round(minutes_since/60/24)." day/s") | sort -epoch | head 1 | eval result=if(type==SYSTEM_SHUTDOWN OR type==DAEMON_END,"Shutdown",period) | table result</query>
           <earliest>0</earliest>
           <latest></latest>
         </search>
