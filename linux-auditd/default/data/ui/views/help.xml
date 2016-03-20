@@ -30,27 +30,6 @@
         <option name="useThousandSeparators">1</option>
       </single>
     </panel>
-    <panel>
-      <single>
-        <title>SA Status</title>
-        <search>
-          <query>| rest splunk_server=local /services/apps/local | search title=SA-LinuxAuditd OR title=linux-auditd | eventstats dc(title) as titles | eventstats dc(version) as versions | eval status=case(titles==1,"SA NOT INSTALLED",titles==2 AND versions==2,"SA VERSION MISMATCH",titles==2 AND versions==1,"WORKING") | stats values(status)</query>
-          <earliest>-4h</earliest>
-          <latest>now</latest>
-        </search>
-        <option name="drilldown">none</option>
-        <option name="linkView">search</option>
-        <option name="colorBy">value</option>
-        <option name="colorMode">none</option>
-        <option name="numberPrecision">0</option>
-        <option name="showSparkline">1</option>
-        <option name="showTrendIndicator">1</option>
-        <option name="trendColorInterpretation">standard</option>
-        <option name="trendDisplayMode">absolute</option>
-        <option name="useColors">0</option>
-        <option name="useThousandSeparators">1</option>
-      </single>
-    </panel>
   </row>
   <row>
     <panel>
