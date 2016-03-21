@@ -15,7 +15,7 @@
       <table>
         <title>auditd_hosts lookup</title>
         <search>
-          <query>| tstats values(host) as host where [|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] | outputlookup auditd_hosts</query>
+          <query> | tstats values(host) as host WHERE [|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] | mvexpand host limit=0 | outputlookup auditd_hosts</query>
           <earliest>$time_selector.earliest$</earliest>
           <latest>$time_selector.latest$</latest>
         </search>
@@ -28,7 +28,7 @@
       <table>
         <title>auditd_host_inventory KVStore collection</title>
         <search>
-          <query>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type="DAEMON_START" | dedup host | rex field=kernel "^(?&lt;kernel_version&gt;.+)\.(?&lt;distribution_release&gt;.+)\.(?&lt;architecture&gt;.+)$" | table host kernel_version distribution_release architecture | rename host as _key | outputlookup append=true auditd_host_inventory</query>
+          <query>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type="DAEMON_START" | dedup host | rex field=kernel "^(?&lt;kernel_version&gt;[0-9\-\.]+)\.(?&lt;distribution_release&gt;[^\.]+)\.?(?&lt;architecture&gt;.*)" | eval architecture=if(architecture=="","unknown",architecture) | table host kernel_version distribution_release architecture | rename host as _key | outputlookup append=true auditd_host_inventory</query>
           <earliest>$time_selector.earliest$</earliest>
           <latest>$time_selector.latest$</latest>
         </search>

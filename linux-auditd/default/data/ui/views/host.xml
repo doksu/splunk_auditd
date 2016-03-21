@@ -47,7 +47,7 @@
       <title>IP Address</title>
       <single>
         <search>
-          <query>| inputlookup auditd_host_inventory | rename _key as host | search host=$host|s$ | lookup dnslookup clienthost as host | fields clientip</query>
+          <query>| inputlookup auditd_host_inventory | rename _key as host | search host=$host|s$ | lookup dnslookup clienthost as host | eval ip=coalesce(clientip,"unknown") | fields ip</query>
           <earliest>0</earliest>
         </search>
         <option name="drilldown">none</option>
@@ -109,7 +109,7 @@
       <title>Process Crashes (last 24 hours)</title>
       <table>
         <search>
-          <query>[| inputlookup auditd_indicies] [| inputlookup auditd_sourcetypes] type=ANOM_ABEND | table _time process signal_description</query>
+          <query>[| inputlookup auditd_indicies] [| inputlookup auditd_sourcetypes] host=$host|s$ type=ANOM_ABEND | table _time process signal_description</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
         </search>
@@ -124,7 +124,7 @@
       <title>Event count by severity (last 7 days)</title>
       <chart>
         <search>
-          <query>| pivot Auditd Auditd count(Auditd) as count SPLITROW _time PERIOD hour SPLITROW severity FILTER host is $host|s$ | timechart sum(count) as total by severity</query>
+          <query>| pivot Auditd Auditd count(Auditd) as count SPLITROW _time PERIOD hour SPLITROW severity FILTER host is $host|s$ | timechart span=1h sum(count) as total by severity</query>
           <earliest>-7d@h</earliest>
           <latest>now</latest>
         </search>
