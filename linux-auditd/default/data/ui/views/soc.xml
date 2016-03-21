@@ -75,7 +75,7 @@
       <single>
         <title>Event Type Anomalies</title>
         <search>
-          <query>| pivot Auditd Auditd count(Auditd) as count FILTER severity in (critical, high) SPLITROW _time PERIOD hour | fillnull value=0 | timechart span=1h sum(count) as total</query>
+          <query>| pivot Auditd Auditd count(Auditd) as count FILTER severity in (critical, high) SPLITROW _time PERIOD hour | eval count=coalesce(count,0) | timechart span=1h sum(count) as total</query>
           <earliest>-72h@h</earliest>
           <latest>now</latest>
         </search>
@@ -162,7 +162,7 @@
         <option name="wrap">true</option>
         <option name="rowNumbers">false</option>
         <option name="drilldown">row</option>
-	<drilldown>
+        <drilldown>
           <link>search?earliest=-72h&amp;q=search [|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] host=$row.host$ type=$row.type$</link>
         </drilldown>
         <option name="dataOverlayMode">none</option>
