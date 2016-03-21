@@ -44,6 +44,8 @@ export = system
 [models]
 export = system
 
+[datamodels]
+export = system
 
 ### VIEWSTATES: even normal users should be able to create shared viewstates
 
