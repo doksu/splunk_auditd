@@ -1,4 +1,4 @@
-<dashboard>
+<dashboard refresh="60">
   <label>Help</label>
   <description></description>
   <row>
