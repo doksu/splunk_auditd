@@ -73,9 +73,9 @@
         <option name="underLabel">detected in the last hour</option>
       </single>
       <single>
-        <title>Event Type Anomalies</title>
+        <title>Severe Events</title>
         <search>
-          <query>| pivot Auditd Auditd count(Auditd) as count FILTER severity in (critical, high) SPLITROW _time PERIOD hour | eval count=coalesce(count,0) | timechart span=1h sum(count) as total</query>
+          <query>| pivot Auditd Auditd count(Auditd) as count FILTER severity in (critical, high) SPLITROW _time PERIOD hour | timechart span=1h sum(count) as total | fillnull</query>
           <earliest>-72h@h</earliest>
           <latest>now</latest>
         </search>
@@ -102,8 +102,9 @@
       <title>Auditd Host Changes</title>
       <table>
         <search>
-          <query>| set diff [| tstats values(host) AS host WHERE earliest=-24h sourcetype=linux*audit | mvexpand host limit=0 | fields host | fields - _*] [| inputlookup auditd_hosts | fields host | fields - _*] | lookup auditd_hosts host OUTPUT host AS host2 | eval status=if(isnull(host2),"new","missing") | table host status</query>
-          <earliest>0</earliest>
+          <query>| set diff [| tstats values(host) AS host WHERE earliest=-24h sourcetype=linux*audit | mvexpand host limit=0 | fields host | fields - _*] [| inputlookup auditd_hosts | fields host | fields - _*] | search NOT [|inputlookup auditd_decommissioned_hosts] | lookup auditd_hosts host OUTPUT host AS host2 | eval status=if(isnull(host2),"new","missing") | table host status</query>
+          <earliest>-7d@h</earliest>
+          <latest>now</latest>
         </search>
         <option name="wrap">true</option>
         <option name="rowNumbers">false</option>
@@ -152,7 +153,7 @@
       </table>
     </panel>
     <panel>
-      <title>Event Type Anomalies</title>
+      <title>Severe Events</title>
       <table>
         <search>
           <query>| pivot Auditd Auditd count(Auditd) as count FILTER severity in (critical, high) SPLITROW host SPLITROW type| fields - count</query>
