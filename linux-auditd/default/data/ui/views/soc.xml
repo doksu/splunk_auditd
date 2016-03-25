@@ -153,14 +153,14 @@
       <table>
         <search>
           <query>| pivot Auditd Auditd count(Auditd) as count FILTER severity in (critical, high) SPLITROW host SPLITROW type | fields - count</query>
-          <earliest>-72h</earliest>
+          <earliest>-72h@h</earliest>
           <latest>now</latest>
         </search>
         <option name="wrap">true</option>
         <option name="rowNumbers">false</option>
         <option name="drilldown">row</option>
         <drilldown>
-          <link>search?earliest=-72h&amp;q=search [|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] host=$row.host$ type=$row.type$</link>
+          <link>search?earliest=-72h@h&amp;q=search [|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] host=$row.host$ type=$row.type$</link>
         </drilldown>
         <option name="dataOverlayMode">none</option>
         <option name="count">10</option>
