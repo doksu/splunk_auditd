@@ -29,9 +29,9 @@
       <single>
         <title>Anomalous Event Volume</title>
         <search>
-          <query>| tstats count WHERE [|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] BY _time span=1h | predict count as prediction upper95=upper lower95=lower future_timespan=0 | eval difference=case(count&gt;lower AND count&lt;upper, 0, count&lt;lower, round((count-lower)/prediction,1), count&gt;upper, round((count-upper)/prediction,1)) | search difference=* | table _time difference</query>
+          <query>| tstats count WHERE [|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] BY _time span=1h | predict count as prediction upper95=upper lower95=lower future_timespan=0 | eval range=upper-lower | eval difference=case(count&gt;lower AND count&lt;upper, 0, count&lt;lower, round((count-lower)/range,1), count&gt;upper, round((count-upper)/range,1)) | search difference=* | table _time difference</query>
           <earliest>-7d@h</earliest>
-          <latest>now</latest>
+          <latest>@h</latest>
         </search>
         <option name="drilldown">none</option>
         <option name="colorBy">value</option>
@@ -44,8 +44,8 @@
         <option name="useColors">1</option>
         <option name="useThousandSeparators">0</option>
         <option name="linkView">search</option>
-        <option name="rangeColors">["0xd93f3c","0xf58f39","0x65a637","0x6db7c6","0xf58f39","0xd93f3c"]</option>
-        <option name="rangeValues">[-2,-1,0,1,2]</option>
+        <option name="rangeColors">["0xd93f3c","0x65a637","0xf58f39","0xd93f3c"]</option>
+        <option name="rangeValues">[-1,0,1]</option>
         <option name="trendInterval">auto</option>
         <option name="underLabel">magnitude relative to trend</option>
       </single>
@@ -118,9 +118,9 @@
     <panel>
       <table>
         <search>
-          <query>| tstats count WHERE [|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] BY _time span=1h | predict count as prediction upper95=upper lower95=lower future_timespan=0 | eval difference=case(count&gt;lower AND count&lt;upper, 0, count&lt;lower, round((count-lower)/prediction,1), count&gt;upper, round((count-upper)/prediction,1)) | search difference&gt;1 OR difference&lt;-1 | table _time difference</query>
+          <query>| tstats count WHERE [|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] BY _time span=1h | predict count as prediction upper95=upper lower95=lower future_timespan=0 | eval range=upper-lower | eval difference=case(count&gt;lower AND count&lt;upper, 0, count&lt;lower, round((count-lower)/range,1), count&gt;upper, round((count-upper)/range,1)) | search difference&gt;=1 OR difference&lt;=-1 | table _time difference | sort -_time</query>
           <earliest>-7d@h</earliest>
-          <latest>now</latest>
+          <latest>@h</latest>
         </search>
         <option name="wrap">true</option>
         <option name="rowNumbers">false</option>
@@ -135,7 +135,7 @@
     <panel>
       <table>
         <search>
-          <query>| pivot Auditd AVC values(tcontext_type) AS tcontext_type SPLITROW _time PERIOD hour SPLITROW scontext_domain | mvexpand tcontext_type | eventstats count by scontext_domain, tcontext_type | where count=1 | table scontext_domain tcontext_type</query>
+          <query>| pivot Auditd AVC values(tcontext_type) AS tcontext_type SPLITROW _time PERIOD hour SPLITROW scontext_domain | mvexpand tcontext_type | eventstats count by scontext_domain, tcontext_type | where count==1 | sort -_time | table scontext_domain tcontext_type</query>
           <earliest>-72h</earliest>
           <latest>now</latest>
         </search>
