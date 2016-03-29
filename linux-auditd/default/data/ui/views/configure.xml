@@ -68,21 +68,4 @@
       </table>
     </panel>
   </row>
-  <row>
-    <panel>
-      <table>
-        <title>user_crypto_fingerprint KVStore collection</title>
-        <search>
-          <query>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type="CRYPTO_KEY_USER" fp=* NOT fp=? NOT user=unknown NOT user=root NOT [|inputlookup user_crypto_fingerprint] | dedup user fp | table user fp | outputlookup append=true user_crypto_fingerprint</query>
-          <earliest>$time_selector.earliest$</earliest>
-          <latest>$time_selector.latest$</latest>
-        </search>
-        <option name="wrap">true</option>
-        <option name="rowNumbers">false</option>
-        <option name="drilldown">cell</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="count">10</option>
-      </table>
-    </panel>
-  </row>
 </form>
