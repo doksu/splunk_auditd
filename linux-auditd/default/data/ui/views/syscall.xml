@@ -22,12 +22,12 @@
       <valuePrefix>system_call=</valuePrefix>
       <delimiter> OR </delimiter>
     </input>
-    <input type="checkbox" token="subject_role">
-      <label>Origin</label>
+    <input type="dropdown" token="subject_role">
+      <label>Subject Role</label>
+      <choice value="*">Any</choice>
       <choice value="scontext_role=system_r">System Daemon</choice>
-      <choice value="scontext_role!=system_r">User Process</choice>
-      <delimiter> OR </delimiter>
-      <default>scontext_role=system_r,scontext_role!=system_r</default>
+      <choice value="scontext_role!=system_r">Non-System Daemon</choice>
+      <default>*</default>
     </input>
     <input type="multiselect" token="action">
       <label>Action</label>
