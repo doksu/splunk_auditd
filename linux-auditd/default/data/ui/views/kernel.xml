@@ -53,7 +53,7 @@
     <input type="text" token="other">
       <label>Other Search Terms</label>
       <default>(NOT auid=* OR auid&lt;100000)</default>
-      <seed>*</seed>
+      <initialValue>*</initialValue>
     </input>
     <input type="time" token="time_selector" searchWhenChanged="false">
       <label></label>
