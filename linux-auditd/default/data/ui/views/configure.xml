@@ -58,7 +58,7 @@
       <table>
         <title>auditd_indicies lookup</title>
         <search>
-          <query>| tstats values(sourcetype) as sourcetype where [|inputlookup auditd_sourcetypes] by index | table index | outputlookup auditd_indicies</query>
+          <query>| tstats values(sourcetype) as sourcetype where index=* [|inputlookup auditd_sourcetypes] by index | table index | outputlookup auditd_indicies</query>
           <earliest>$time_selector.earliest$</earliest>
           <latest>$time_selector.latest$</latest>
         </search>
