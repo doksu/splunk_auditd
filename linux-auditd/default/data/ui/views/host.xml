@@ -106,7 +106,7 @@
       <title>Process Crashes (last 24 hours)</title>
       <table>
         <search>
-          <query>[| inputlookup auditd_indicies] [| inputlookup auditd_sourcetypes] host=$host|s$ type=ANOM_ABEND | table _time process signal_description</query>
+          <query>[| inputlookup auditd_indices] [| inputlookup auditd_sourcetypes] host=$host|s$ type=ANOM_ABEND | table _time process signal_description</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
         </search>

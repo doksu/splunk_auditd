@@ -96,9 +96,9 @@
     </panel>
     <panel>
       <table>
-        <title>Indicies with Linux Audit events</title>
+        <title>Indices with Linux Audit events</title>
         <search>
-          <query>|inputlookup auditd_indicies</query>
+          <query>|inputlookup auditd_indices</query>
           <earliest>0</earliest>
           <latest></latest>
         </search>

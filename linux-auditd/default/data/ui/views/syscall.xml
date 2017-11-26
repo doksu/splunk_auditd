@@ -53,7 +53,7 @@
     <panel>
       <chart>
         <title>Count by Host</title>
-        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by host</searchString>
+        <searchString>[|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by host</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -79,7 +79,7 @@
     <panel>
       <chart>
         <title>Count by User</title>
-        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by user</searchString>
+        <searchString>[|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by user</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -107,7 +107,7 @@
     <panel>
       <chart>
         <title>Count by Command</title>
-        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by comm</searchString>
+        <searchString>[|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by comm</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -133,7 +133,7 @@
     <panel>
       <chart>
         <title>Count by System Call</title>
-        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by system_call</searchString>
+        <searchString>[|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by system_call</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -161,7 +161,7 @@
     <panel>
       <chart>
         <title>Count by Action</title>
-        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by action</searchString>
+        <searchString>[|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] type=SYSCALL host=$host$ user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | timechart count by action</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -189,7 +189,7 @@
     <panel>
       <table>
         <title>Correlated Events</title>
-        <searchString>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] (type=SYSCALL OR type=PATH OR type=CWD) host=$host$ | transaction host event_id maxpause=1s | eval nametype=coalesce(nametype, objtype) | search user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | table _time host user ses cwd comm name system_call nametype success</searchString>
+        <searchString>[|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] (type=SYSCALL OR type=PATH OR type=CWD) host=$host$ | transaction host event_id maxpause=1s | eval nametype=coalesce(nametype, objtype) | search user=$user$ comm=$cmd$ $syscall$ $subject_role$ $action$ $other$ | table _time host user ses cwd comm name system_call nametype success</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="wrap">true</option>

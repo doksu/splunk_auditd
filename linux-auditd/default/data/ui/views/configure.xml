@@ -15,7 +15,7 @@
       <table>
         <title>auditd_hosts lookup</title>
         <search>
-          <query> | tstats values(host) as host WHERE [|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] | mvexpand host limit=0 | outputlookup auditd_hosts</query>
+          <query> | tstats values(host) as host WHERE [|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] | mvexpand host limit=0 | outputlookup auditd_hosts</query>
           <earliest>$time_selector.earliest$</earliest>
           <latest>$time_selector.latest$</latest>
         </search>
@@ -28,7 +28,7 @@
       <table>
         <title>auditd_host_inventory KVStore collection</title>
         <search>
-          <query>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type="DAEMON_START" | dedup host | rex field=kernel "^(?&lt;kernel_version&gt;[0-9\-\.]+)\.(?&lt;distribution_release&gt;[^\.]+)\.?(?&lt;architecture&gt;.*)" | eval architecture=if(architecture=="","unknown",architecture) | table host kernel_version distribution_release architecture | rename host as _key | outputlookup append=true auditd_host_inventory</query>
+          <query>[|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] type="DAEMON_START" | dedup host | rex field=kernel "^(?&lt;kernel_version&gt;[0-9\-\.]+)\.(?&lt;distribution_release&gt;[^\.]+)\.?(?&lt;architecture&gt;.*)" | eval architecture=if(architecture=="","unknown",architecture) | table host kernel_version distribution_release architecture | rename host as _key | outputlookup append=true auditd_host_inventory</query>
           <earliest>$time_selector.earliest$</earliest>
           <latest>$time_selector.latest$</latest>
         </search>
@@ -43,7 +43,7 @@
       <table>
         <title>learnt_posix_identities KVStore collection</title>
         <search>
-          <query>[|inputlookup auditd_indicies] [|inputlookup auditd_sourcetypes] type="USER_START" acct=* NOT acct=root NOT auid=0 terminal=/dev/tty* OR NOT addr=? | dedup auid | table auid acct | rename auid as _key | rename acct as user | outputlookup append=true learnt_posix_identities</query>
+          <query>[|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] type="USER_START" acct=* NOT acct=root NOT auid=0 terminal=/dev/tty* OR NOT addr=? | dedup auid | table auid acct | rename auid as _key | rename acct as user | outputlookup append=true learnt_posix_identities</query>
           <earliest>$time_selector.earliest$</earliest>
           <latest>$time_selector.latest$</latest>
         </search>
@@ -56,9 +56,9 @@
     </panel>
     <panel>
       <table>
-        <title>auditd_indicies lookup</title>
+        <title>auditd_indices lookup</title>
         <search>
-          <query>| tstats values(sourcetype) as sourcetype where index=* [|inputlookup auditd_sourcetypes] by index | table index | outputlookup auditd_indicies</query>
+          <query>| tstats values(sourcetype) as sourcetype where index=* [|inputlookup auditd_sourcetypes] by index | table index | outputlookup auditd_indices</query>
           <earliest>$time_selector.earliest$</earliest>
           <latest>$time_selector.latest$</latest>
         </search>
