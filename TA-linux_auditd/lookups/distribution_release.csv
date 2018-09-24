@@ -1,12 +1,9 @@
 distribution_release,distribution_name
-fc20,Fedora 20
-fc21,Fedora 21
-fc22,Fedora 22
-fc23,Fedora 23
-fc24,Fedora 24
-fc25,Fedora 25
-fc26,Fedora 26
 fc27,Fedora 27
+fc28,Fedora 28
+fc29,Fedora 29
+fc30,Fedora 30
 el5,Enterprise Linux 5
 el6,Enterprise Linux 6
 el7,Enterprise Linux 7
+el8,Enterprise Linux 8

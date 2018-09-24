@@ -13,7 +13,7 @@
       <single>
         <title>TA Status</title>
         <search>
-          <query>| rest splunk_server=local /services/apps/local | search title=TA_linux-auditd OR title=linux-auditd | eventstats dc(title) as titles | eventstats dc(version) as versions | eval status=case(titles==1,"TA NOT INSTALLED",titles==2 AND versions==2,"TA VERSION MISMATCH",titles==2 AND versions==1,"WORKING") | stats values(status)</query>
+          <query>| rest splunk_server=local /services/apps/local | search title=TA-linux_auditd OR title=linux-auditd | eventstats dc(title) as titles | eventstats dc(version) as versions | eval status=case(titles==1,"TA NOT INSTALLED",titles==2 AND versions==2,"TA VERSION MISMATCH",titles==2 AND versions==1,"WORKING") | stats values(status)</query>
           <earliest>-4h</earliest>
           <latest>now</latest>
         </search>

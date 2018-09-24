@@ -1,6 +1,7 @@
-linux-auditd/appserver/addons/SA-LinuxAuditd/metadata/local.meta
-linux-auditd/appserver/addons/TA_linux-auditd/lookups/local_posix_identities.csv
-linux-auditd/appserver/addons/TA_linux-auditd/lookups/posix_identities.csv
-linux-auditd/appserver/addons/TA_linux-auditd/lookups/directory_identities.csv
+TA-linux_auditd/lookups/local_posix_identities.csv
+TA-linux_auditd/lookups/posix_identities.csv
+TA-linux_auditd/lookups/directory_identities.csv
+TA-linux_auditd/local/*
+TA-linux_auditd/metadata/local.meta
 linux-auditd/local/*
 linux-auditd/metadata/local.meta

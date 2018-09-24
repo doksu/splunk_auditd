@@ -1,2 +1,3 @@
 sourcetype
 linux:audit
+linux:audit:enriched
