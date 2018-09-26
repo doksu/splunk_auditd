@@ -1,4 +1,4 @@
-<nav search_view="search" color="#CC6699">
+<nav search_view="search">
   <view name="soc" default='true' />
   <view name="kernel" />
   <view name="syscall" />
