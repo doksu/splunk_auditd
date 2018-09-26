@@ -1,5 +1,5 @@
-This TA provides field extractions, lookups and CIM mapping for Linux Auditd events (sourcetype=linux:audit)
+This TA provides field extractions, lookups and CIM mapping for Linux Auditd events (sourcetype=linux:audit AND sourcetype=linux:audit:enriched)
 
-Audit event type descriptions in the audit_types.csv lookup are derived from: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security_Guide/sec-Audit_Record_Types.html
+Audit event type descriptions in the audit_types.csv lookup are derived from: https://github.com/linux-audit/audit-documentation/blob/master/specs/messages/message-dictionary.csv
 
-The setrans.csv lookup content is sourced from /etc/selinux/targeted/setrans.conf on Enterprise Linux 6.
+The setrans.csv lookup content is sourced from /etc/selinux/targeted/setrans.conf on Enterprise Linux.

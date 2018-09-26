@@ -230,7 +230,7 @@
     <panel>
       <table>
         <title>Events</title>
-        <searchString>[|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | table _time host _raw audit_type_description</searchString>
+        <searchString>[|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] host=$host$ ($category$) ($severity$) ($type$) ($action$) (NOT user=* OR user=$user$) $other$ | table _time host _raw audit_description</searchString>
         <earliestTime>$time_selector.earliest$</earliestTime>
         <latestTime>$time_selector.latest$</latestTime>
         <option name="list.drilldown">full</option>

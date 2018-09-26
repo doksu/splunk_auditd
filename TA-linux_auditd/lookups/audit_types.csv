@@ -1,142 +1,198 @@
-type,audit_category,severity,audit_type_description
-ADD_GROUP,user,medium,"Triggered when a user-space group is added."
-ADD_USER,user,medium,"Triggered when a user-space user account is added."
-ANOM_ABEND,system,medium,"Triggered when a processes ends abnormally (with a signal that could cause a core dump, if enabled)."
-ANOM_ACCESS_FS,system,critical,"Triggered when a file or a directory access ends abnormally."
-ANOM_ADD_ACCT,user,critical,"Triggered when a user-space account addition ends abnormally."
-ANOM_AMTU_FAIL,system,critical,"Triggered when a failure of the Abstract Machine Test Utility (AMTU) is detected."
-ANOM_CRYPTO_FAIL,system,critical,"Triggered when a failure in the cryptographic system is detected."
-ANOM_DEL_ACCT,user,critical,"Triggered when a user-space account deletion ends abnormally."
-ANOM_EXEC,system,critical,"Triggered when an execution of a file ends abnormally."
-ANOM_LOGIN_ACCT,user,critical,"Triggered when an account login attempt ends abnormally."
-ANOM_LOGIN_FAILURES,user,critical,"Triggered when the limit of failed login attempts is reached."
-ANOM_LOGIN_LOCATION,user,critical,"Triggered when a login attempt is made from a forbidden location."
-ANOM_LOGIN_SESSIONS,user,critical,"Triggered when a login attempt reaches the maximum amount of concurrent sessions."
-ANOM_LOGIN_TIME,user,critical,"Triggered when a login attempt is made at a time when it is prevented by, for example, pam_time."
-ANOM_MAX_DAC,system,critical,"Triggered when the maximum amount of Discretionary Access Control (DAC) failures is reached."
-ANOM_MAX_MAC,mac,critical,"Triggered when the maximum amount of Mandatory Access Control (MAC) failures is reached."
-ANOM_MK_EXEC,system,critical,"Triggered when a file is made executable."
-ANOM_MOD_ACCT,user,critical,"Triggered when a user-space account modification ends abnormally."
-ANOM_PROMISCUOUS,system,medium,"Triggered when a device enables or disables promiscuous mode."
-ANOM_RBAC_FAIL,mac,critical,"Triggered when a Role-Based Access Control (RBAC) self-test failure is detected."
-ANOM_RBAC_INTEGRITY_FAIL,mac,critical,"Triggered when a Role-Based Access Control (RBAC) file integrity test failure is detected."
-ANOM_ROOT_TRANS,user,critical,"Triggered when a user becomes root."
-AVC,mac,medium,"Triggered to record an SELinux permission check."
-AVC_PATH,mac,informational,"Triggered to record the dentry and vfsmount pair when an SELinux permission check occurs."
-BPRM_FCAPS,user,medium,"Triggered when a user executes a program with a file system capability."
-CAPSET,user,medium,"Triggered to record the capabilities being set for process-based capabilities, for example, running as root to drop capabilities."
-CHGRP_ID,user,medium,"Triggered when a user-space group ID is changed."
-CHUSER_ID,user,medium,"Triggered when a user-space user ID is changed."
-CONFIG_CHANGE,system,medium,"Triggered when the Audit system configuration is modified."
-CRED_ACQ,user,informational,"Triggered when a user acquires user-space credentials."
-CRED_DISP,user,informational,"Triggered when a user disposes of user-space credentials."
-CRED_REFR,user,informational,"Triggered when a user refreshes their user-space credentials."
-CRYPTO_FAILURE_USER,user,medium,"Triggered when a decrypt, encrypt, or randomize cryptographic operation fails."
-CRYPTO_KEY_USER,user,informational,"Triggered to record the cryptographic key identifier used for cryptographic purposes."
-CRYPTO_LOGIN,user,low,"Triggered when a cryptographic officer login attempt is detected."
-CRYPTO_LOGOUT,user,low,"Triggered when a crypto officer logout attempt is detected."
-CRYPTO_PARAM_CHANGE_USER,user,medium,"Triggered when a change in a cryptographic parameter is detected."
-CRYPTO_REPLAY_USER,user,critical,"Triggered when a replay attack is detected."
-CRYPTO_SESSION,user,informational,"Triggered to record parameters set during a TLS session establishment."
-CRYPTO_TEST_USER,user,informational,"Triggered to record cryptographic test results as required by the FIPS-140 standard."
-CWD,system,informational,"Triggered to record the current working directory."
-DAC_CHECK,system,informational,"Triggered to record DAC check results."
-DAEMON_ABORT,system,critical,"Triggered when a daemon is stopped due to an error."
-DAEMON_ACCEPT,system,low,"Triggered when the auditd daemon accepts a remote connection."
-DAEMON_CLOSE,system,low,"Triggered when the auditd daemon closes a remote connection."
-DAEMON_CONFIG,system,medium,"Triggered when a daemon configuration change is detected."
-DAEMON_END,system,medium,"Triggered when a daemon is successfully stopped."
-DAEMON_RESUME,system,medium,"Triggered when the auditd daemon resumes logging."
-DAEMON_ROTATE,system,low,"Triggered when the auditd daemon rotates the Audit log files."
-DAEMON_START,system,medium,"Triggered when the auditd daemon is started."
-DEL_GROUP,user,medium,"Triggered when a user-space group is deleted"
-DEL_USER,user,medium,"Triggered when a user-space user is deleted"
-DEV_ALLOC,system,medium,"Triggered when a device is allocated."
-DEV_DEALLOC,system,medium,"Triggered when a device is deallocated."
-EOE,system,informational,"Triggered to record the end of a multi-record event."
-EXECVE,system,informational,"Triggered to record arguments of the execve(2) system call."
-FD_PAIR,system,informational,"Triggered to record the use of the pipe and socketpair system calls."
-FS_RELABEL,mac,low,"Triggered when a file system relabel operation is detected."
-GRP_AUTH,user,low,"Triggered when a group password is used to authenticate against a user-space group."
-INTEGRITY_DATA,system,informational,"Triggered to record a data integrity verification event run by the kernel."
-INTEGRITY_HASH,system,informational,"Triggered to record a hash type integrity verification event run by the kernel."
-INTEGRITY_METADATA,system,informational,"Triggered to record a metadata integrity verification event run by the kernel."
-INTEGRITY_PCR,system,critical,"Triggered to record Platform Configuration Register (PCR) invalidation messages."
-INTEGRITY_RULE,mac,informational,"Triggered to record a policy rule."
-INTEGRITY_STATUS,system,informational,"Triggered to record the status of integrity verification."
-IPC,system,informational,"Triggered to record information about a Inter-Process Communication object referenced by a system call."
-IPC_SET_PERM,system,informational,"Triggered to record information about new values set by an IPC_SET control operation on an IPC object."
-KERNEL,system,informational,"Triggered to record the initialization of the Audit system."
-KERNEL_OTHER,system,informational,"Triggered to record information from third-party kernel modules."
-LABEL_LEVEL_CHANGE,mac,medium,"Triggered when an object's level label is modified."
-LABEL_OVERRIDE,mac,high,"Triggered when an administrator overrides an object's level label."
-LOGIN,user,informational,"Triggered to record relevant login information when a user log in to access the system."
-MAC_CIPSOV4_ADD,network,high,"Triggered when a Commercial Internet Protocol Security Option (CIPSO) user adds a new Domain of Interpretation (DOI). Adding DOIs is a part of the packet labeling capabilities of the kernel provided by NetLabel."
-MAC_CIPSOV4_DEL,network,high,"Triggered when a CIPSO user deletes an existing DOI. Adding DOIs is a part of the packet labeling capabilities of the kernel provided by NetLabel."
-MAC_CONFIG_CHANGE,mac,medium,"Triggered when an SELinux Boolean value is changed."
-MAC_IPSEC_EVENT,network,informational,"Triggered to record information about an IPSec event, when one is detected, or when the IPSec configuration changes."
-MAC_MAP_ADD,network,high,"Triggered when a new Linux Security Module (LSM) domain mapping is added. LSM domain mapping is a part of the packet labeling capabilities of the kernel provided by NetLabel."
-MAC_MAP_DEL,network,high,"Triggered when an existing LSM domain mapping is added. LSM domain mapping is a part of the packet labeling capabilities of the kernel provided by NetLabel."
-MAC_POLICY_LOAD,mac,informational,"Triggered when a SELinux policy file is loaded."
-MAC_STATUS,mac,critical,"Triggered when the SELinux mode (enforcing, permissive, off) is changed."
-MAC_UNLBL_ALLOW,network,low,"Triggered when unlabeled traffic is allowed when using the packet labeling capabilities of the kernel provided by NetLabel."
-MAC_UNLBL_STCADD,network,low,"Triggered when a static label is added when using the packet labeling capabilities of the kernel provided by NetLabel."
-MAC_UNLBL_STCDEL,network,low,"Triggered when a static label is deleted when using the packet labeling capabilities of the kernel provided by NetLabel."
-MMAP,system,informational,"Triggered to record a file descriptor and flags of the mmap(2) system call."
-MQ_GETSETATTR,system,informational,"Triggered to record the mq_getattr(3) and mq_setattr(3) message queue attributes."
-MQ_NOTIFY,system,informational,"Triggered to record arguments of the mq_notify(3) system call."
-MQ_OPEN,system,informational,"Triggered to record arguments of the mq_open(3) system call."
-MQ_SENDRECV,system,informational,"Triggered to record arguments of the mq_send(3) and mq_receive(3) system calls."
-NETFILTER_CFG,network,medium,"Triggered when Netfilter chain modifications are detected."
-NETFILTER_PKT,network,informational,"Triggered to record packets traversing Netfilter chains."
-OBJ_PID,system,informational,"Triggered to record information about a process to which a signal is sent."
-PATH,system,informational,"Triggered to record file name path information."
-RESP_ACCT_LOCK,user,critical,"Triggered when a user account is locked."
-RESP_ACCT_LOCK_TIMED,user,critical,"Triggered when a user account is locked for a specified period of time."
-RESP_ACCT_REMOTE,user,critical,"Triggered when a user account is locked from a remote session."
-RESP_ACCT_UNLOCK_TIMED,user,critical,"Triggered when a user account is unlocked after a configured period of time."
-RESP_ALERT,system,critical,"Triggered when an alert email is sent."
-RESP_ANOMALY,system,critical,"Triggered when an anomaly was not acted upon."
-RESP_EXEC,system,critical,"Triggered when an intrusion detection program responds to a threat originating from the execution of a program."
-RESP_HALT,system,critical,"Triggered when the system is shut down."
-RESP_KILL_PROC,system,critical,"Triggered when a process is terminated."
-RESP_SEBOOL,mac,medium,"Triggered when an SELinux Boolean value is set."
-RESP_SINGLE,system,critical,"Triggered when the system is put into single-user mode."
-RESP_TERM_ACCESS,user,critical,"Triggered when a session is terminated."
-RESP_TERM_LOCK,user,critical,"Triggered when a terminal is locked."
-ROLE_ASSIGN,mac,medium,"Triggered when an administrator assigns a user to an SELinux role."
-ROLE_MODIFY,mac,medium,"Triggered when an administrator modifies an SELinux role."
-ROLE_REMOVE,mac,medium,"Triggered when an administrator removes a user from an SELinux role."
-SELINUX_ERR,mac,critical,"Triggered when an internal SELinux error is detected."
-SERVICE_START,system,informational,"Triggered when a service is started."
-SERVICE_STOP,system,informational,"Triggered when a service is stopped."
-SOCKADDR,network,informational,"Triggered to record a socket address user or returned by a system call."
-SOCKETCALL,network,informational,"Triggered to record arguments of the sys_socketcall system call (used to multiplex many socket-related system calls)."
-SYSCALL,system,medium,"Triggered to record a system call to the kernel."
-SYSTEM_BOOT,system,informational,"Triggered when the system is booted up."
-SYSTEM_RUNLEVEL,system,medium,"Triggered when the system's run level is changed."
-SYSTEM_SHUTDOWN,system,medium,"Triggered when the system is shut down."
-TEST,system,informational,"Triggered to record the success value of a test message."
-TRUSTED_APP,system,informational,"The record of this type can be used by third party application that require auditing."
-TTY,system,informational,"Triggered when TTY input was sent to an administrative process."
-USER_ACCT,user,low,"Triggered when a user-space user account is modified."
-USER_AUTH,user,low,"Triggered when a user-space authentication attempt is detected."
-USER_AVC,user,medium,"Triggered when a user-space AVC message is generated."
-USER_CHAUTHTOK,user,medium,"Triggered when a user account attribute is modified."
-USER_CMD,user,low,"Triggered when a user-space shell command is executed."
-USER_END,user,informational,"Triggered when a user-space session is terminated."
-USER_ERR,user,low,"Triggered when a user account state error is detected."
-USER_LABELED_EXPORT,user,low,"Triggered when an object is exported with an SELinux label."
-USER_LOGIN,user,low,"Triggered when a user logs in."
-USER_LOGOUT,user,low,"Triggered when a user logs out."
-USER_MAC_POLICY_LOAD,user,informational,"Triggered when a user-space daemon loads an SELinux policy."
-USER_MGMT,user,informational,"Triggered to record user-space management data."
-USER_ROLE_CHANGE,user,low,"Triggered when a user's SELinux role is changed."
-USER_SELINUX_ERR,user,high,"Triggered when a user-space SELinux error is detected."
-USER_START,user,informational,"Triggered when a user-space session is started."
-USER_TTY,user,informational,"Triggered when an explanatory message about TTY input to an administrative process is sent from user-space."
-USER_UNLABELED_EXPORT,user,low,"Triggered when an object is exported without SELinux label."
-USYS_CONFIG,user,medium,"Triggered when a user-space system configuration change is detected."
-VIRT_CONTROL,system,informational,"Triggered when a virtual machine is started, paused, or stopped."
-VIRT_MACHINE_ID,system,informational,"Triggered to record the binding of a label to a virtual machine."
-VIRT_RESOURCE,system,informational,"Triggered to record resource assignment of a virtual machine."
+type,audit_value,audit_origin,audit_class,audit_category,severity,audit_description
+AA,1500,KERN,?,system,unknown,
+ACCT_LOCK,1135,USER,IND,user,informational,User's account locked by admin
+ACCT_UNLOCK,1136,USER,IND,user,informational,User's account unlocked by admin
+ADD,1003,USER,DEP,mac,informational,Add syscall rule -- deprecated
+ADD_GROUP,1116,USER,IND,user,medium,Group account added
+ADD_RULE,1011,USER,CTL,mac,informational,Add syscall filtering rule
+ADD_USER,1114,USER,IND,user,medium,User account added
+ANOM_ABEND,1701,KERN,IND,system,medium,Process ended abnormally
+ANOM_ACCESS_FS,2111,USER,IND,system,critical,Access of file or directory ended abnormally
+ANOM_ADD_ACCT,2114,USER,IND,user,critical,Adding a user account ended abnormally
+ANOM_AMTU_FAIL,2107,USER,IND,system,critical,AMTU (Abstract Machine Test Utility) failure
+ANOM_CRYPTO_FAIL,2110,USER,IND,system,critical,Crypto system test failure
+ANOM_DEL_ACCT,2115,USER,IND,user,critical,Deleting a user account ended abnormally
+ANOM_EXEC,2112,USER,IND,system,critical,Execution of file ended abnormally
+ANOM_LINK,1702,KERN,SC,system,critical,Suspicious use of file links
+ANOM_LOGIN_ACCT,2103,USER,IND,user,critical,Login attempted to watched account
+ANOM_LOGIN_FAILURES,2100,USER,IND,user,critical,Failed login limit reached
+ANOM_LOGIN_LOCATION,2104,USER,IND,user,critical,Login from forbidden location
+ANOM_LOGIN_SESSIONS,2102,USER,IND,user,critical,Maximum concurrent sessions reached
+ANOM_LOGIN_TIME,2101,USER,IND,user,critical,Login attempted at bad time
+ANOM_MAX_DAC,2105,USER,IND,system,critical,Max DAC (Discretionary Access Control) failures reached
+ANOM_MAX_MAC,2106,USER,IND,mac,critical,Max MAC (Mandatory Access Control) failures reached
+ANOM_MK_EXEC,2113,USER,IND,system,critical,Make an executable
+ANOM_MOD_ACCT,2116,USER,IND,user,critical,Changing an account ended abnormally
+ANOM_PROMISCUOUS,1700,KERN,SC/IND,system,medium,Device changed promiscuous mode
+ANOM_RBAC_FAIL,2108,USER,IND,mac,critical,RBAC (Role-Based Access Control) self test failure
+ANOM_RBAC_INTEGRITY_FAIL,2109,USER,IND,mac,critical,RBAC (Role-Based Access Control) file integrity test failure
+ANOM_ROOT_TRANS,2117,USER,IND,user,critical,User became root
+APPARMOR_ALLOWED,1502,KERN,SC,mac,medium,
+APPARMOR_AUDIT,1501,KERN,SC,mac,medium,
+APPARMOR_DENIED,1503,KERN,SC,mac,medium,
+APPARMOR_ERROR,1506,KERN,SC,mac,medium,
+APPARMOR_HINT,1504,KERN,SC,mac,medium,
+APPARMOR_KILL,enum1507,KERN,SC,mac,medium,
+APPARMOR_STATUS,1505,KERN,SC,mac,informational,
+AVC,1400,KERN,SC,mac,medium,SELinux AVC (Access Vector Cache) denial or grant
+AVC_PATH,1402,KERN,SC,mac,informational,"dentry, vfsmount pair from AVC"
+BPRM_FCAPS,1321,KERN,SC,user,medium,Information about file system capabilities increasing permissions
+CAPSET,1322,KERN,SC,user,medium,Record showing argument to sys_capset setting process-based capabilities
+CHGRP_ID,1119,USER,IND,user,medium,User space group ID changed
+CHUSER_ID,1125,USER,IND,user,medium,Changed user ID supplemental data
+CONFIG_CHANGE,1305,KERN,IND,system,medium,Audit system configuration change
+CRED_ACQ,1103,USER,IND,user,informational,User credential acquired
+CRED_DISP,1104,USER,IND,user,informational,User credential disposed
+CRED_REFR,1110,USER,IND,user,informational,User credential refreshed
+CRYPTO_FAILURE_USER,2405,USER,IND,user,medium,"Fail decrypt, encrypt or randomize operation"
+CRYPTO_IKE_SA,2408,USER,IND,user,informational,Parameters related to IKE SA
+CRYPTO_IPSEC_SA,2409,USER,IND,user,informational,Parameters related to IPSEC SA
+CRYPTO_KEY_USER,2404,USER,IND,user,informational,"Create, delete, negotiate cryptographic key identifier"
+CRYPTO_LOGIN,2402,USER,IND,user,low,Cryptographic officer login
+CRYPTO_LOGOUT,2403,USER,IND,user,low,Cryptographic officer logout
+CRYPTO_PARAM_CHANGE_USER,2401,USER,IND,user,medium,Cryptographic attribute change
+CRYPTO_REPLAY_USER,2406,USER,IND,user,critical,Cryptographic replay attack detected
+CRYPTO_SESSION,2407,USER,IND,user,informational,Parameters set during TLS session establishment
+CRYPTO_TEST_USER,2400,USER,IND,user,informational,Cryptographic test results
+CWD,1307,KERN,SC,system,informational,Current working directory
+DAC_CHECK,1118,USER,IND,system,informational,User space DAC check results
+DAEMON_ABORT,1202,USER,IND,system,critical,Daemon error stop record
+DAEMON_ACCEPT,1207,USER,IND,system,low,Auditd accepted remote connection
+DAEMON_CLOSE,1208,USER,IND,system,low,Auditd closed remote connection
+DAEMON_CONFIG,1203,USER,IND,system,medium,Daemon config change
+DAEMON_END,1201,USER,IND,system,medium,Daemon normal stop record
+DAEMON_ERR,1209,USER,IND,system,critical,Auditd internal error
+DAEMON_RECONFIG,1204,USER,IND,system,critical,Auditd should reconfigure
+DAEMON_RESUME,1206,USER,IND,system,medium,Auditd should resume logging
+DAEMON_ROTATE,1205,USER,IND,system,low,Auditd should rotate logs
+DAEMON_START,1200,USER,IND,system,medium,Daemon startup record
+DEL,1004,USER,DEP,system,medium,Delete syscall rule -- deprecated
+DEL_GROUP,1117,USER,IND,user,medium,Group account deleted
+DEL_RULE,1012,USER,CTL,system,medium,Delete syscall filtering rule
+DEL_USER,1115,USER,IND,user,medium,User account deleted
+DEV_ALLOC,2307,USER,IND,system,medium,Device was allocated
+DEV_DEALLOC,2308,USER,IND,system,medium,Device was deallocated
+EOE,1320,KERN,CTL,system,informational,End of multi-record event
+EXECVE,1309,KERN,SC,system,informational,Arguments supplied to the execve system call
+FD_PAIR,1317,KERN,SC,system,informational,Information for pipe and socketpair system calls
+FEATURE_CHANGE,1328,KERN,IND,system,informational,Audit feature changed value
+FS_RELABEL,2309,USER,IND,mac,low,Filesystem relabeled
+FS_WATCH,1301,KERN,DEP,system,low,Deprecated
+GET,1000,USER,CTL,system,low,Get status
+GET_FEATURE,1019,USER,CTL,system,low,Get which features are enabled
+GRP_AUTH,1126,USER,IND,user,low,Authentication for group password
+GRP_CHAUTHTOK,1133,USER,IND,user,low,Group account password or PIN changed
+GRP_MGMT,1132,USER,IND,user,low,Group account attribute was modified
+INTEGRITY_DATA,1800,KERN,SC,system,informational,Data integrity verification
+INTEGRITY_HASH,1803,KERN,SC,system,informational,Integrity HASH type
+INTEGRITY_METADATA,1801,KERN,SC,system,informational,Metadata integrity verification
+INTEGRITY_PCR,1804,KERN,SC,system,critical,PCR (Platform Configuration Register) invalidation messages
+INTEGRITY_RULE,1805,KERN,SC/IND,mac,informational,Policy rule
+INTEGRITY_STATUS,1802,KERN,SC,system,informational,Integrity enable status
+IPC,1303,KERN,SC,system,informational,System call IPC (Inter-Process Communication) object
+IPC_SET_PERM,1311,KERN,SC,system,informational,IPC new permissions record type
+KERNEL,2000,KERN,IND,system,informational,Kernel audit status
+KERNEL_OTHER,1316,KERN,IND,system,informational,For use by 3rd party modules
+KERN_MODULE,1330,KERN,SC,system,medium,Kernel Module events
+LABEL_LEVEL_CHANGE,2304,USER,IND,mac,medium,Object level SELinux label modified
+LABEL_OVERRIDE,2303,USER,IND,mac,high,Administrator is overriding a SELinux label
+LIST,1002,USER,DEP,system,low,List syscall rules -- deprecated
+LIST_RULES,1013,USER,CTL,system,low,List syscall filtering rules
+LOGIN,1006,KERN,IND,user,informational,Define the login ID and information
+MAC_CALIPSO_ADD,1418,KERN,SC,network,medium,NetLabel: add CALIPSO DOI (Domain of Interpretation) entry
+MAC_CALIPSO_DEL,1419,KERN,SC,network,medium,NetLabel: delete CALIPSO DOI (Domain of Interpretation) entry
+MAC_CHECK,1134,USER,IND,mac,low,User space MAC (Mandatory Access Control) decision results
+MAC_CIPSOV4_ADD,1407,KERN,SC,network,high,NetLabel: add CIPSOv4 (Commercial Internet Protocol Security Option) DOI (Domain of Interpretation) entry
+MAC_CIPSOV4_DEL,1408,KERN,SC,network,high,NetLabel: del CIPSOv4 (Commercial Internet Protocol Security Option) DOI (Domain of Interpretation) entry
+MAC_CONFIG_CHANGE,1405,KERN,SC,mac,medium,SELinux Boolean value modification
+MAC_IPSEC_ADDSA,1411,KERN,DEP,network,low,Not used
+MAC_IPSEC_ADDSPD,1413,KERN,DEP,network,low,Not used
+MAC_IPSEC_DELSA,1412,KERN,DEP,network,low,Not used
+MAC_IPSEC_DELSPD,1414,KERN,DEP,network,low,Not used
+MAC_IPSEC_EVENT,1415,KERN,SC,network,informational,Audit an IPsec event
+MAC_MAP_ADD,1409,KERN,SC,network,high,NetLabel: add LSM (Linux Security Module) domain mapping
+MAC_MAP_DEL,1410,KERN,SC,network,high,NetLabel: del LSM (Linux Security Module) domain mapping
+MAC_POLICY_LOAD,1403,KERN,SC,mac,informational,SELinux Policy file load
+MAC_STATUS,1404,KERN,SC,mac,critical,"SELinux mode (enforcing, permissive, off) changed"
+MAC_UNLBL_ALLOW,1406,KERN,SC,network,low,NetLabel: allow unlabeled traffic
+MAC_UNLBL_STCADD,1416,KERN,SC,network,low,NetLabel: add a static label
+MAC_UNLBL_STCDEL,1417,KERN,SC,network,low,NetLabel: del a static label
+MAKE_EQUIV,1015,USER,CTL,user,low,Append to watched tree
+MMAP,1323,KERN,SC,system,informational,Mmap system call file descriptor and flags
+MQ_GETSETATTR,1315,KERN,SC,system,informational,POSIX MQ get/set attribute record type
+MQ_NOTIFY,1314,KERN,SC,system,informational,POSIX MQ notify record type
+MQ_OPEN,1312,KERN,SC,system,informational,POSIX MQ open record type
+MQ_SENDRECV,1313,KERN,SC,system,informational,POSIX MQ send/receive record type
+NETFILTER_CFG,1325,KERN,IND/SC,network,medium,Netfilter chain modifications
+NETFILTER_PKT,1324,KERN,IND,network,informational,Packets traversing netfilter chains
+OBJ_PID,1318,KERN,SC,system,informational,ptrace target
+PATH,1302,KERN,SC,system,informational,Filename path information
+PROCTITLE,1327,KERN,SC,system,informational,Process Title info
+REPLACE,1329,KERN,CTL,system,medium,Replace auditd if this probe unanswered
+RESP_ACCT_LOCK,2207,USER,IND,user,critical,User account was locked
+RESP_ACCT_LOCK_TIMED,2205,USER,IND,user,critical,User account locked for time
+RESP_ACCT_REMOTE,2204,USER,IND,user,critical,User account locked from remote access
+RESP_ACCT_UNLOCK_TIMED,2206,USER,IND,user,critical,User account unlocked from time
+RESP_ALERT,2201,USER,IND,system,critical,Alert email was sent
+RESP_ANOMALY,2200,USER,IND,system,critical,Anomaly not reacted to
+RESP_EXEC,2210,USER,IND,system,critical,Execute a script
+RESP_HALT,2212,USER,IND,system,critical,Take the system down
+RESP_KILL_PROC,2202,USER,IND,system,critical,Kill program
+RESP_SEBOOL,2209,USER,IND,mac,medium,Set an SELinux boolean
+RESP_SINGLE,2211,USER,IND,system,critical,Go to single user mode
+RESP_TERM_ACCESS,2203,USER,IND,user,critical,Terminate session
+RESP_TERM_LOCK,2208,USER,IND,user,critical,Terminal was locked
+ROLE_ASSIGN,2301,USER,IND,mac,medium,Administrator assigned user to SELinux role
+ROLE_MODIFY,2311,USER,IND,mac,medium,Administrator modified an SELinux role
+ROLE_REMOVE,2302,USER,IND,mac,medium,Administrator removed user from SELinux role
+SECCOMP,1326,KERN,IND,system,high,Secure Computing event
+SELINUX_ERR,1401,KERN,SC,mac,critical,Internal SELinux errors
+SERVICE_START,1130,USER,IND,system,informational,Service (daemon) start
+SERVICE_STOP,1131,USER,IND,system,informational,Service (daemon) stop
+SET,1001,USER,CTL,system,medium,Set status (enable/disable/auditd)
+SET_FEATURE,1018,USER,CTL,system,high,Turn an audit feature on or off
+SIGNAL_INFO,1010,USER,CTL,system,informational,Get info about sender of signal to auditd
+SOCKADDR,1306,KERN,SC,network,informational,System call socket address argument information
+SOCKETCALL,1304,KERN,SC,network,informational,System call socketcall arguments
+SYSCALL,1300,KERN,SC,system,medium,System call event information
+SYSTEM_BOOT,1127,USER,IND,system,informational,System boot
+SYSTEM_RUNLEVEL,1129,USER,IND,system,medium,System runlevel change
+SYSTEM_SHUTDOWN,1128,USER,IND,system,medium,System shutdown
+TEST,1120,USER,IND,system,informational,Used for test success messages
+TRIM,1014,USER,CTL,system,informational,Trim junk from watched tree
+TRUSTED_APP,1121,USER,IND,system,informational,Trusted app msg - freestyle text
+TTY,1319,KERN,IND,system,informational,Input on an administrative TTY
+TTY_GET,1016,USER,CTL,system,low,Get TTY auditing status
+TTY_SET,1017,USER,CTL,system,low,Set TTY auditing status
+USER,1005,USER,DEP,user,low,Message from userspace -- deprecated
+USER_ACCT,1101,USER,IND,user,low,User system access authorization
+USER_AUTH,1100,USER,IND,user,low,User system access authentication
+USER_AVC,1107,USER,IND,user,medium,User space AVC (Access Vector Cache) message
+USER_CHAUTHTOK,1108,USER,IND,user,medium,User account password or PIN changed
+USER_CMD,1123,USER,IND,user,low,User shell command and args
+USER_DEVICE,1137,USER,IND,user,low,User space hotplug device changes
+USER_END,1106,USER,IND,user,informational,User session end
+USER_ERR,1109,USER,IND,user,low,User account state error
+USER_LABELED_EXPORT,2305,USER,IND,user,low,Object exported with SELinux label
+USER_LOGIN,1112,USER,IND,user,low,User has logged in
+USER_LOGOUT,1113,USER,IND,user,low,User has logged out
+USER_MAC_CONFIG_CHANGE,2312,USER,IND,mac,high,Change made to MAC (Mandatory Access Control) policy
+USER_MAC_POLICY_LOAD,2310,USER,IND,user,informational,Usersapce daemon loaded SELinux policy
+USER_MGMT,1102,USER,IND,user,informational,User account attribute change
+USER_ROLE_CHANGE,2300,USER,IND,user,low,User changed to a new SELinux role
+USER_SELINUX_ERR,1122,USER,IND,user,high,SELinux user space error
+USER_START,1105,USER,IND,user,informational,User session start
+USER_TTY,1124,USER,IND,user,informational,Non-ICANON TTY input meaning
+USER_UNLABELED_EXPORT,2306,USER,IND,user,low,Object exported without SELinux label
+USYS_CONFIG,1111,USER,IND,user,medium,User space system config change
+VIRT_CONTROL,2500,USER,IND,system,informational,"Start, Pause, Stop VM"
+VIRT_CREATE,2504,USER,IND,system,informational,Creation of guest image
+VIRT_DESTROY,2505,USER,IND,system,informational,Destruction of guest image
+VIRT_INTEGRITY_CHECK,2503,USER,IND,system,informational,Guest integrity results
+VIRT_MACHINE_ID,2502,USER,IND,system,informational,Binding of label to VM
+VIRT_MIGRATE_IN,2506,USER,IND,system,informational,Inbound guest migration info
+VIRT_MIGRATE_OUT,2507,USER,IND,system,informational,Outbound guest migration info
+VIRT_RESOURCE,2501,USER,IND,system,informational,Resource assignment
+WATCH_INS,1007,USER,DEP,system,informational,Insert file/dir watch entry
+WATCH_LIST,1009,USER,DEP,system,low,List all file/dir watches
+WATCH_REM,1008,USER,DEP,system,medium,Remove file/dir watch entry
