@@ -28,7 +28,7 @@
       <single>
         <title>Anomalous Event Volume</title>
         <search>
-          <query>| tstats count WHERE [|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] BY _time span=1h | predict count as prediction upper95=upper lower95=lower future_timespan=0 | rename upper(prediction) as upper | rename lower(prediction) as lower | eval range=upper-lower | eval difference=case(count&gt;lower AND count&lt;upper, 0, count&lt;lower, round((count-lower)/range,1), count&gt;upper, round((count-upper)/range,1)) | search difference=* | table _time difference</query>
+          <query>| tstats count WHERE [|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] BY _time span=1h | predict count as prediction future_timespan=0 algorithm=LLP | rename lower95(prediction(count)) as lower, upper95(prediction(count)) as upper | eval range=upper-lower | eval difference=case(count&gt;lower AND count&lt;upper, 0, count&lt;lower, round((count-lower)/range,1), count&gt;upper, round((count-upper)/range,1)) | search difference=* | table _time difference</query>
           <earliest>-7d@h</earliest>
           <latest>@h</latest>
         </search>
