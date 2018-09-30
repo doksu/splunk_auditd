@@ -43,7 +43,7 @@
     </input>
     <input type="text" token="other">
       <label>Other Search Terms</label>
-      <default>NOT user=unknown</default>
+      <default>*</default>
     </input>
     <input type="time" token="time_selector">
       <label></label>
