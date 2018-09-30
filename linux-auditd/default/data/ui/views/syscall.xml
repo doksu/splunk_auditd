@@ -226,7 +226,7 @@
       <table>
         <title>Correlated Events</title>
         <search>
-          <query>[|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] host=$host$ type IN ("SYSCALL", "PATH", "CWD", "PROCTITLE") | transaction host event_id maxpause=1s | eval nametype=coalesce(nametype, objtype) | search user=$user$ comm=$cmd$ key=$key$ $syscall$ $subject_role$ $action$ $other$ | table _time host event_id key user ses cwd comm command name system_call nametype success</query>
+          <query>[|inputlookup auditd_indices] [|inputlookup auditd_sourcetypes] host=$host$ type IN ("SYSCALL", "PATH", "CWD", "PROCTITLE") | transaction host event_id maxpause=1s | eval nametype=coalesce(nametype, objtype) | search user=$user$ comm=$cmd$ key=$key$ $syscall$ $subject_role$ $action$ $other$ | table _time host event_id key user ses cwd command process_name name system_call nametype success</query>
           <earliest>$time_selector.earliest$</earliest>
           <latest>$time_selector.latest$</latest>
         </search>
