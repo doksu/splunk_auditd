@@ -33,9 +33,6 @@
          "package":null
       }
    },
-   "incompatibleApps":{
-      "TA_linux-auditd"
-   },
    "platformRequirements":{
       "splunk":{
          "Enterprise":">=6.5.0"
