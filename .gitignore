@@ -1,5 +1,4 @@
 TA-linux_auditd/lookups/local_posix_identities.csv
-TA-linux_auditd/lookups/posix_identities.csv
 TA-linux_auditd/lookups/directory_identities.csv
 TA-linux_auditd/local/*
 TA-linux_auditd/metadata/local.meta
