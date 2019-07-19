@@ -12,6 +12,7 @@
             "objectName": "Auditd",
             "displayName": "Auditd",
             "parentName": "BaseEvent",
+            "comment": "",
             "fields": [
                 {
                     "fieldName": "type",
@@ -56,7 +57,7 @@
                     "fieldSearch": "",
                     "required": false,
                     "multivalue": false,
-                    "hidden": true,
+                    "hidden": false,
                     "editable": true,
                     "displayName": "tcontext_type",
                     "comment": ""
@@ -107,6 +108,30 @@
                     "hidden": true,
                     "editable": true,
                     "displayName": "avc_result",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "key",
+                    "owner": "Auditd",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "key",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "user",
+                    "owner": "Auditd",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "user",
                     "comment": ""
                 },
                 {
@@ -204,7 +229,7 @@
                 {
                     "outputFields": [
                         {
-                            "fieldName": "user",
+                            "fieldName": "key",
                             "owner": "Auditd",
                             "type": "string",
                             "fieldSearch": "",
@@ -212,23 +237,16 @@
                             "multivalue": false,
                             "hidden": false,
                             "editable": true,
-                            "displayName": "user",
-                            "comment": "",
-                            "lookupOutputFieldName": "user"
+                            "displayName": "key",
+                            "comment": ""
                         }
                     ],
-                    "calculationType": "Lookup",
-                    "lookupName": "posix_identities",
-                    "comment": "",
-                    "lookupInputs": [
-                        {
-                            "inputField": "auid",
-                            "lookupField": "uid"
-                        }
-                    ],
+                    "calculationID": "gaen57cbm0m",
                     "owner": "Auditd",
-                    "calculationID": "lsroignn11",
-                    "editable": true
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(key==\"(null)\",null(),key)"
                 }
             ],
             "constraints": [
@@ -243,48 +261,13 @@
             "objectName": "AVC",
             "displayName": "AVC",
             "parentName": "Auditd",
+            "comment": "",
             "fields": [
-                {
-                    "fieldName": "type",
-                    "owner": "Auditd",
-                    "type": "string",
-                    "fieldSearch": "type=*",
-                    "required": true,
-                    "multivalue": false,
-                    "hidden": false,
-                    "editable": true,
-                    "displayName": "type",
-                    "comment": ""
-                },
-                {
-                    "fieldName": "action",
-                    "owner": "Auditd",
-                    "type": "string",
-                    "fieldSearch": "",
-                    "required": false,
-                    "multivalue": false,
-                    "hidden": false,
-                    "editable": true,
-                    "displayName": "action",
-                    "comment": ""
-                },
-                {
-                    "fieldName": "auid",
-                    "owner": "Auditd",
-                    "type": "number",
-                    "fieldSearch": "",
-                    "required": false,
-                    "multivalue": false,
-                    "hidden": false,
-                    "editable": true,
-                    "displayName": "auid",
-                    "comment": ""
-                },
                 {
                     "fieldName": "tcontext_type",
                     "owner": "Auditd",
                     "type": "string",
-                    "fieldSearch": "tcontext_type=*",
+                    "fieldSearch": "",
                     "required": true,
                     "multivalue": false,
                     "hidden": false,
@@ -296,7 +279,7 @@
                     "fieldName": "scontext_domain",
                     "owner": "Auditd",
                     "type": "string",
-                    "fieldSearch": "scontext_domain=*",
+                    "fieldSearch": "",
                     "required": true,
                     "multivalue": false,
                     "hidden": false,
@@ -320,7 +303,7 @@
                     "fieldName": "tclass",
                     "owner": "Auditd",
                     "type": "string",
-                    "fieldSearch": "tclass=*",
+                    "fieldSearch": "",
                     "required": true,
                     "multivalue": false,
                     "hidden": false,
@@ -332,7 +315,7 @@
                     "fieldName": "avc_result",
                     "owner": "Auditd",
                     "type": "string",
-                    "fieldSearch": "avc_result=*",
+                    "fieldSearch": "",
                     "required": true,
                     "multivalue": false,
                     "hidden": false,
@@ -341,51 +324,15 @@
                     "comment": ""
                 },
                 {
-                    "fieldName": "_time",
-                    "owner": "BaseEvent",
-                    "type": "timestamp",
-                    "fieldSearch": "",
-                    "required": false,
-                    "multivalue": false,
-                    "hidden": false,
-                    "editable": true,
-                    "displayName": "_time",
-                    "comment": ""
-                },
-                {
-                    "fieldName": "host",
-                    "owner": "BaseEvent",
+                    "fieldName": "key",
+                    "owner": "Auditd",
                     "type": "string",
                     "fieldSearch": "",
                     "required": false,
                     "multivalue": false,
-                    "hidden": false,
+                    "hidden": true,
                     "editable": true,
-                    "displayName": "host",
-                    "comment": ""
-                },
-                {
-                    "fieldName": "source",
-                    "owner": "BaseEvent",
-                    "type": "string",
-                    "fieldSearch": "",
-                    "required": false,
-                    "multivalue": false,
-                    "hidden": false,
-                    "editable": true,
-                    "displayName": "source",
-                    "comment": ""
-                },
-                {
-                    "fieldName": "sourcetype",
-                    "owner": "BaseEvent",
-                    "type": "string",
-                    "fieldSearch": "",
-                    "required": false,
-                    "multivalue": false,
-                    "hidden": false,
-                    "editable": true,
-                    "displayName": "sourcetype",
+                    "displayName": "key",
                     "comment": ""
                 }
             ],
