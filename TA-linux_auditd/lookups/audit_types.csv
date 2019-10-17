@@ -154,6 +154,7 @@ SET_FEATURE,1018,USER,CTL,system,high,Turn an audit feature on or off
 SIGNAL_INFO,1010,USER,CTL,system,informational,Get info about sender of signal to auditd
 SOCKADDR,1306,KERN,SC,network,informational,System call socket address argument information
 SOCKETCALL,1304,KERN,SC,network,informational,System call socketcall arguments
+SOFTWARE_UPDATE,,,,system,informational,Software Update
 SYSCALL,1300,KERN,SC,system,medium,System call event information
 SYSTEM_BOOT,1127,USER,IND,system,informational,System boot
 SYSTEM_RUNLEVEL,1129,USER,IND,system,medium,System runlevel change

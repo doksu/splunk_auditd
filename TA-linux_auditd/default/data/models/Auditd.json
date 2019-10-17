@@ -247,6 +247,28 @@
                     "comment": "",
                     "calculationType": "Eval",
                     "expression": "if(key==\"(null)\",null(),key)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "mitre_attack",
+                            "owner": "Auditd",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "mitre_attack",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "emcl6lkpxy",
+                    "owner": "Auditd",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "ltrim(mvfilter(match(eventtype, \"t\\d+$\")),\"auditd_attack_\")"
                 }
             ],
             "constraints": [
