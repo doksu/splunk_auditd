@@ -1,4 +1,4 @@
-<form>
+<form version="1.1">
   <label>Configure</label>
   <description>This dashboard is used to initially configure all the Linux Auditd app's lookups. Please use the time picker to determine how far back the app should learn then click 'Submit'.</description>
   <fieldset submitButton="true">

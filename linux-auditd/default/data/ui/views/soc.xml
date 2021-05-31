@@ -1,4 +1,4 @@
-<dashboard refresh="300">
+<dashboard version="1.1" refresh="300">
   <label>Security Operations Centre</label>
   <row>
     <panel>

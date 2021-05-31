@@ -1,9 +1,11 @@
 distribution_release,distribution_name
-fc27,Fedora 27
-fc28,Fedora 28
-fc29,Fedora 29
 fc30,Fedora 30
+fc31,Fedora 31
+fc32,Fedora 32
+fc33,Fedora 33
+fc34,Fedora 34
 el5,Enterprise Linux 5
 el6,Enterprise Linux 6
 el7,Enterprise Linux 7
 el8,Enterprise Linux 8
+el9,Enterprise Linux 9
